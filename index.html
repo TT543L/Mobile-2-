@@ -1237,41 +1237,32 @@ body {
     color: var(--text-primary);
     word-break: break-word;
 }
-/* ▲▲▲ 새 스타일 붙여넣기 끝 ▲▲▲ */
 
-/* ▼▼▼ 이 새 스타일을 <style> 의 끝에 붙여넣으세요 ▼▼▼ */
-
-/* === 게시물 좋아요 영역 스타일 === */
 .post-likes-section {
     display: flex;
     align-items: center;
-    gap: 6px; /* 아이콘과 텍스트의 간격 */
-    padding: 8px 10px; /* 내부 여백 */
+    gap: 6px; 
+    padding: 8px 10px; 
     font-size: 13px;
-    color: var(--accent-color); /* 테마 블루 사용 */
-    background-color: #f0f5fa; /* 은은한 배경색 추가 */
+    color: var(--accent-color); 
+    background-color: #f0f5fa; 
     border-top: 1px solid #e9eef3;
     border-bottom: 1px solid #e9eef3;
-    margin-top: 5px; /* 위쪽 아이콘과 약간의 거리 유지 */
+    margin-top: 5px; 
 }
 
 .post-likes-section .like-icon {
     width: 16px;
     height: 16px;
-    fill: currentColor; /* SVG 아이콘이 부모 요소의 색상을 상속하도록 */
-    flex-shrink: 0; /* 아이콘이 압축되는 것을 방지 */
+    fill: currentColor; 
+    flex-shrink: 0; 
 }
 
-/* ▲▲▲ 새 스타일 붙여넣기 끝 ▲▲▲ */
-
-/* ▼▼▼ 이 새 스타일을 <style> 의 끝에 붙여넣으세요 ▼▼▼ */
-
-/* === @멘션 팝업 메뉴 스타일 === */
 .at-mention-popup {
-    position: absolute; /* 부모 요소에 상대적으로 위치 지정 */
-    bottom: 100%; /* 입력창 상단에 표시 */
-    left: 40px; /* 입력창 왼쪽과 정렬 (아바타 너비 고려) */
-    width: calc(100% - 40px); /* 너비는 입력창과 비슷하게 */
+    position: absolute; 
+    bottom: 100%; 
+    left: 40px; 
+    width: calc(100% - 40px); 
     max-height: 120px;
     overflow-y: auto;
     background-color: var(--secondary-bg);
@@ -1279,7 +1270,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
     z-index: 10;
-    display: none; /* 기본 숨김 */
+    display: none; 
 }
 
 .at-mention-item {
@@ -1297,45 +1288,34 @@ body {
 .at-mention-item:hover {
     background-color: #f5f5f5;
 }
-/* ▲▲▲ 새 스타일 붙여넣기 끝 ▲▲▲ */
 
-/* ▼▼▼ 이 새 스타일을 <style> 의 끝에 붙여넣으세요 ▼▼▼ */
-
-/* ▼▼▼ 다음 조각을 사용하세요【새 스타일】현재 것을 대체하세요 #favorites-list 스타일 ▼▼▼ */
-
-/* 즐겨찾기 보기를 플렉스 컨테이너로 만들어 위에서 아래로 정렬 */
 #favorites-view {
     display: flex;
     flex-direction: column;
 }
 
-/* 즐겨찾기 페이지 헤더 높이를 고정하여 압축되지 않도록 */
 #favorites-view > .header {
     flex-shrink: 0;
 }
 
-/* === 즐겨찾기 목록 스타일 (수정 후) === */
 #favorites-list {
     flex-grow: 1; 
     overflow-y: auto; 
-    overflow-x: hidden; /* <-- 이 줄을 새로 추가하여 가로 스크롤 금지 */
+    overflow-x: hidden; 
     padding: 15px; 
     display: flex;
     flex-direction: column;
     gap: 15px; 
 }
 
-/* ▲▲▲ 대체 끝 ▲▲▲ */
-
 .favorite-item-card {
     background-color: var(--secondary-bg);
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    position: relative; /* 삭제 버튼 위치 지정을 위해 */
+    position: relative; 
 }
 
-/* 카드 헤더, 아바타, 이름 및 출처 포함 */
 .fav-card-header {
     display: flex;
     align-items: center;
@@ -1364,7 +1344,6 @@ body {
     color: var(--text-secondary);
 }
 
-/* 카드 내용 */
 .fav-card-content {
     font-size: 14px;
     line-height: 1.6;
@@ -1374,10 +1353,9 @@ body {
 }
 
 .fav-card-content .chat-image {
-    margin-top: 8px; /* 이미지와 텍스트의 간격 */
+    margin-top: 8px; 
 }
 
-/* 삭제 버튼 */
 .fav-delete-btn {
     position: absolute;
     top: 10px;
@@ -1399,24 +1377,19 @@ body {
     color: #ff3b30;
 }
 
-/* ▲▲▲ 새 스타일 붙여넣기 끝 ▲▲▲ */
-
-/* ▼▼▼ 이 새 스타일을 <style> 의 끝에 붙여넣으세요 ▼▼▼ */
-
-/* === 검색창 스타일 === */
 .search-bar-container {
     padding: 10px 15px;
-    background-color: #f9f9f9; /* 목록 배경색과 일치하도록 */
-    position: relative; /* 지우기 버튼 위치 지정을 위해 */
+    background-color: #f9f9f9; 
+    position: relative; 
     flex-shrink: 0;
 }
 
 #favorites-search-input {
     width: 100%;
-    padding: 10px 30px 10px 15px; /* 오른쪽에 지우기 버튼을 위한 공간 확보 */
+    padding: 10px 30px 10px 15px; 
     font-size: 14px;
     border: 1px solid var(--border-color);
-    border-radius: 18px; /* 둥근 모서리 직사각형, 더 현대적으로 */
+    border-radius: 18px; 
     background-color: var(--secondary-bg);
     box-sizing: border-box;
     outline: none;
@@ -1442,9 +1415,6 @@ body {
     cursor: pointer;
 }
 
-/* ▲▲▲ 새 스타일 붙여넣기 끝 ▲▲▲ */
-
-/* === 채팅 인터페이스 다중 선택 작업 표시줄 최적화 === */
 #chat-interface-screen .header .selection-controls {
     display: flex;
     justify-content: space-between;
@@ -1459,16 +1429,14 @@ body {
     padding: 5px;
 }
 
-/* === 즐겨찾기 페이지 다중 선택 모드 스타일 === */
 #favorites-view.selection-mode .favorite-item-card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 선택 상자 스타일 */
 .favorite-item-card::before {
     content: '';
     position: absolute;
-    left: -25px; /* 카드 왼쪽 바깥에 배치 */
+    left: -25px; 
     top: 50%;
     transform: translateY(-50%);
     width: 20px;
