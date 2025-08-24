@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>EPhone</title>
-  <link rel="manifest" href="manifest.json">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/nzP9sgxr/chan-125.png">
+    <link rel="manifest" href="manifest.json">
 	<script src="dexie.js"></script>
     <style>
         @font-face { font-family: 'bulangni'; src: url('') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
         :root { --screen-width: 350px; --screen-height: 650px; --secondary-bg: #ffffff; --border-color: #e0e0e0; --text-primary: #1f1f1f; --text-secondary: #8a8a8a; --accent-color: #007bff; }
         html { height: 100%; overflow: hidden; }
-
-/* ▼▼▼ 아래의 것으로【이 통째의】새로운 코드로, 모든 오래된 body, phone-frame, phone-screen 등 스타일을 대체하세요 ▼▼▼ */
 
 /* 1. body를 초기화하여 깨끗한 캔버스로 만드세요 */
 body {
