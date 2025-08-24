@@ -6773,7 +6773,7 @@ function closePhotoViewer() {
 
             const navItem = document.querySelector('.nav-item[data-view="qzone-screen"]');
             
-            const targetSpan = navItem.querySelector('span'); // 텍스트로 이동 "피드"
+            const targetSpan = navItem.querySelector('span'); 
             let indicator = navItem.querySelector('.unread-indicator');           
 
             if (count > 0) {
@@ -6848,15 +6848,13 @@ function runBackgroundSimulationTick() {
             if (blockedDuration > cooldownMilliseconds) {
                 console.log(`캐릭터 "${chat.name}" 의 쿨다운 기간이 지났습니다, 트리거\"반성\"및 친구 신청 이벤트...`);
                 
-                // 【중요】AI 응답 전에 중복 트리거를 방지하기 위해 트리거 후 즉시 상태를 업데이트합니다
-                chat.relationship.status = 'pending_system_reflection'; // 중복 트리거를 방지하는 임시 상태 설정
-                
+                chat.relationship.status = 'pending_system_reflection'; 
                 triggerAiFriendApplication(chat.id);
             }
         }
-        // 확인 2:처리【친구 관계】의 일반적인 백그라운드 활동
+
         else if (chat.relationship?.status === 'friend' && chat.id !== state.activeChatId) {
-            // 모든 친구가 동시에 행동하는 것을 원치 않으므로 여기의 무작위 트리거 로직은 변경되지 않습니다
+
             if (Math.random() < 0.20) {
                 console.log(`캐릭터 "${chat.name}" 깨어나 독립적인 행동을 준비합니다...`);
                 triggerInactiveAiAction(chat.id);
@@ -6910,7 +6908,6 @@ async function triggerInactiveAiAction(chatId) {
 -   **당신들의 마지막 대화 요약**: ${recentContextSummary}
 -   **【중요】최근 활동 목록**: 이 목록은 **로 표시됩니다[좋아요를 눌렀습니다]** 또는 **[댓글을 달았습니다]**.**우선** 당신이 **아직 상호작용하지 않은** 활동과 소통하세요.`;
 
-    // 【핵심 수정】여기에서 messagesPayload 구축
     const messagesPayload = [];
     messagesPayload.push({ role: 'system', content: systemPrompt });
 
@@ -6918,7 +6915,7 @@ async function triggerInactiveAiAction(chatId) {
         const recentPosts = await db.qzonePosts.orderBy('timestamp').reverse().limit(3).toArray();
         const aiName = chat.name;
         
-        let dynamicContext = ""; // 활동 컨텍스트를 수집하는 변수 사용
+        let dynamicContext = ""; 
         if (recentPosts.length > 0) {
             let postsContext = "\n\n# 최근 게시물 목록 (참고 및 댓글 작성을 위해):\n";
             for (const post of recentPosts) {
@@ -6932,15 +6929,13 @@ async function triggerInactiveAiAction(chatId) {
             dynamicContext = postsContext;
         }
 
-        // 【핵심 수정】모든 활동 정보를 하나의 user 메시지로 전송
         messagesPayload.push({
             role: 'user',
             content: `[시스템 명령:system prompt에서 읽은 규칙과 다음 최신 정보에 따라 독립적인 행동을 시작하세요.]\n${dynamicContext}`
         });
         
-        console.log("백그라운드 활동을 위해 API 요청을 보내는 중, Payload:", JSON.stringify(messagesPayload, null, 2)); // 디버깅을 위한 로그 추가
-
-        // 요청 보내기
+        console.log("백그라운드 활동을 위해 API 요청을 보내는 중, Payload:", JSON.stringify(messagesPayload, null, 2)); 
+        
         const response = await fetch(`${proxyUrl}/v1/chat/completions`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
@@ -6956,14 +6951,13 @@ async function triggerInactiveAiAction(chatId) {
             throw new Error(`API요청 실패: ${response.status} - ${JSON.stringify(errorData)}`);
         }
         const data = await response.json();
-        // 유효한 응답이 있는지 확인
+
         if (!data.choices || data.choices.length === 0 || !data.choices[0].message.content) {
             console.warn(`API비어 있거나 형식이 올바르지 않습니다, 캐릭터 "${chat.name}" 의 이번 백그라운드 활동은 건너뜁니다.`);
             return;
         }
         const responseArray = parseAiResponse(data.choices[0].message.content);
         
-        // AI 반환 명령을 처리하는 후속 로직은 변경되지 않습니다...
         for (const action of responseArray) {
             if (!action) continue;
 
@@ -7021,14 +7015,6 @@ async function triggerInactiveAiAction(chatId) {
     }
 }
 
-// ▼▼▼ 이것을 사용하십시오【최종 수정 버전】함수, 이전 applyScopedCss 함수를 완전히 대체 ▼▼▼
-
-/**
- * 사용자 정의 CSS를 지정된 범위에 안전하게 적용
- * @param {string} cssString 사용자가 입력한 원본 CSS 문자열
- * @param {string} scopeId 스타일을 적용할 범위 ID (예시 '#chat-messages' 또는 '#settings-preview-area')
- * @param {string} styleTagId 작동할 <style> 태그 ID
- */
 function applyScopedCss(cssString, scopeId, styleTagId) {
     const styleTag = document.getElementById(styleTagId);
     if (!styleTag) return;
@@ -7038,7 +7024,6 @@ function applyScopedCss(cssString, scopeId, styleTagId) {
         return;
     }
     
-    // 강화된 범위 처리 함수 - .user와 .ai 스타일 충돌 문제 전문 해결
     const scopedCss = cssString
         .replace(/\s*\.message-bubble\.user\s+([^{]+\{)/g, `${scopeId} .message-bubble.user $1`)
         .replace(/\s*\.message-bubble\.ai\s+([^{]+\{)/g, `${scopeId} .message-bubble.ai $1`)
@@ -7047,55 +7032,40 @@ function applyScopedCss(cssString, scopeId, styleTagId) {
     styleTag.innerHTML = scopedCss;
 }
 
-// ▼▼▼ 이것을 사용하십시오【수정 버전】함수, 이전 updateSettingsPreview 함수를 완전히 대체 ▼▼▼
-
 function updateSettingsPreview() {
     if (!state.activeChatId) return;
     const chat = state.chats[state.activeChatId];
     const previewArea = document.getElementById('settings-preview-area');
     if (!previewArea) return;
 
-    // 1. 현재 설정 값 가져오기
     const selectedTheme = document.querySelector('input[name="theme-select"]:checked')?.value || 'default';
     const fontSize = document.getElementById('font-size-slider').value;
     const customCss = document.getElementById('custom-css-input').value;
-    const background = chat.settings.background; // 배경 설정을 직접 가져오기
+    const background = chat.settings.background; 
 
-    // 2. 미리 보기 영역의 기본 스타일 업데이트
     previewArea.dataset.theme = selectedTheme;
     previewArea.style.setProperty('--chat-font-size', `${fontSize}px`);
     
-    // --- 【핵심 수정】미리 보기 영역의 배경 스타일 직접 업데이트 ---
     if (background && background.startsWith('data:image')) {
         previewArea.style.backgroundImage = `url(${background})`;
-        previewArea.style.backgroundColor = 'transparent'; // 이미지가 있으면 배경색을 투명으로 설정
+        previewArea.style.backgroundColor = 'transparent'; 
     } else {
-        previewArea.style.backgroundImage = 'none'; // 이미지가 없으면 이미지 배경 제거
-        // 배경이 색상 값 또는 그라데이션인 경우(이미지가 아닌 경우),직접 적용
+        previewArea.style.backgroundImage = 'none'; 
         previewArea.style.background = background || '#f0f2f5';
     }
 
-    // 3. 시뮬레이션 기포 렌더링
     previewArea.innerHTML = ''; 
 
-    // 생성\"상대방\"의 기포
-    // 참고:CSS가 의존할 경우를 대비하여 가상 타임스탬프를 전달합니다
     const aiMsg = { role: 'ai', content: '상대방 메시지 미리 보기', timestamp: 1, senderName: chat.name };
     const aiBubble = createMessageElement(aiMsg, chat);
     if(aiBubble) previewArea.appendChild(aiBubble);
 
-    // 생성\"내\"의 기포
     const userMsg = { role: 'user', content: '내 메시지 미리 보기', timestamp: 2 };
     const userBubble = createMessageElement(userMsg, chat);
     if(userBubble) previewArea.appendChild(userBubble);
     
-    // 4. 미리 보기 영역에 사용자 지정 CSS 적용
     applyScopedCss(customCss, '#settings-preview-area', 'preview-bubble-style');
 }
-
-// ▲▲▲ 대체 끝 ▲▲▲
-
-// ▼▼▼ 다음 내용을【새 함수를】JS 기능 함수 정의 영역에 붙여넣으세요 ▼▼▼
 
 async function openGroupManager() {
     await renderGroupList();
@@ -7120,7 +7090,6 @@ async function renderGroupList() {
     });
 }
 
-// ▼▼▼ 이것을 사용하십시오【수정 후】함수를, 이전 addNewGroup 함수를 완전히 대체합니다 ▼▼▼
 async function addNewGroup() {
     const input = document.getElementById('new-group-name-input');
     const name = input.value.trim();
@@ -7129,25 +7098,21 @@ async function addNewGroup() {
         return;
     }
 
-    // 【핵심 수정】추가하기 전에, 먼저 그룹 이름이 이미 존재하는지 확인하세요
     const existingGroup = await db.qzoneGroups.where('name').equals(name).first();
     if (existingGroup) {
         alert(`그룹 "${name}" 이(가) 이미 존재합니다, 다른 이름으로 변경해 주세요!`);
         return;
     }
-    // 【수정 끝】
 
     await db.qzoneGroups.add({ name });
     input.value = '';
     await renderGroupList();
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
 async function deleteGroup(groupId) {
     const confirmed = await showCustomConfirm('삭제 확인', '그룹을 삭제하면 해당 그룹 내의 친구들은\"그룹화되지 않음\".정말 삭제하시겠습니까?', { confirmButtonClass: 'btn-danger' });
     if (confirmed) {
         await db.qzoneGroups.delete(groupId);
-        // 해당 그룹에 속한 친구들의 groupId를 null로 설정
         const chatsToUpdate = await db.chats.where('groupId').equals(groupId).toArray();
         for (const chat of chatsToUpdate) {
             chat.groupId = null;
@@ -7158,31 +7123,18 @@ async function deleteGroup(groupId) {
     }
 }
 
-// ▲▲▲ 새 함수 붙여넣기 종료 ▲▲▲
-
-// ▼▼▼ 이것을【새 함수 블록 전체를】JS 기능 함수 정의 영역의 끝에 붙여넣으세요 ▼▼▼
-
-/**
- * 메시지를 길게 누르면, 작업 메뉴를 표시합니다
- * @param {number} timestamp - 길게 눌러진 메시지의 타임스탬프
- */
 function showMessageActions(timestamp) {
-    // 이미 다중 선택 모드인 경우, 메뉴를 띄우지 않습니다
     if (isSelectionMode) return;
     
     activeMessageTimestamp = timestamp;
     document.getElementById('message-actions-modal').classList.add('visible');
 }
 
-/**
- * 메시지 작업 메뉴 숨기기
- */
 function hideMessageActions() {
     document.getElementById('message-actions-modal').classList.remove('visible');
     activeMessageTimestamp = null;
 }
 
-// ▼▼▼ 이것을 사용하십시오【업데이트됨】버전으로, 이전 openMessageEditor 함수를 대체합니다 ▼▼▼
 async function openMessageEditor() {
     if (!activeMessageTimestamp) return;
 
@@ -7194,7 +7146,6 @@ async function openMessageEditor() {
     hideMessageActions(); 
 
     let contentForEditing;
-    // 【핵심 수정】share를_link 특수 유형 판단에 추가
     const isSpecialType = message.type && ['voice_message', 'ai_image', 'transfer', 'share_link'].includes(message.type);
 
     if (isSpecialType) {
@@ -7205,7 +7156,6 @@ async function openMessageEditor() {
             fullMessageObject.amount = message.amount;
             fullMessageObject.note = message.note;
         } 
-        // 【핵심 수정】공유 링크 유형의 메시지 처리
         else if (message.type === 'share_link') {
             fullMessageObject.title = message.title;
             fullMessageObject.description = message.description;
@@ -7219,7 +7169,6 @@ async function openMessageEditor() {
         contentForEditing = message.content;
     }
 
-    // 【핵심 수정 1】여기에 추가 'link' 템플릿
     const templates = {
         voice: { type: 'voice_message', content: '여기에 음성 내용을 입력하세요' },
         image: { type: 'ai_image', description: '여기에 이미지 설명을 입력하세요' },
@@ -7227,7 +7176,6 @@ async function openMessageEditor() {
         link: { type: 'share_link', title: '기사 제목', description: '기사 요약...', source_name: '출처 웹사이트', content: '게시글 전체 내용...' }
     };
 
-    // 【핵심 수정 2】여기에 새로운\"링크를 추가\"버튼
     const helpersHtml = `
         <div class="format-helpers">
             <button class="format-btn" data-template='${JSON.stringify(templates.voice)}'>음성</button>
@@ -7246,15 +7194,10 @@ async function openMessageEditor() {
     );
 
     if (newContent !== null) {
-        // 【핵심 수정】여기서 호출되는 것은 saveEditedMessage여야 하며, saveAdvancedEditor가 아닙니다
         await saveEditedMessage(timestampToEdit, newContent, true);
     }
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-/**
- * 메시지 텍스트 내용을 클립보드로 복사
- */
 async function copyMessageContent() {
     if (!activeMessageTimestamp) return;
     const chat = state.chats[state.activeChatId];
@@ -7278,17 +7221,10 @@ async function copyMessageContent() {
     hideMessageActions();
 }
 
-// ▼▼▼ 이것을 사용하십시오【업데이트됨】버전으로, 이전 createMessageEditorBlock 함수를 대체합니다 ▼▼▼
-/**
- * 편집 가능한 메시지 블록 생성(텍스트 상자, 서식 도우미 및 삭제 버튼 포함)
- * @param {string} initialContent - 텍스트 상자의 초기 내용
- * @returns {HTMLElement} - 생성된 DOM 요소
- */
 function createMessageEditorBlock(initialContent = '') {
     const block = document.createElement('div');
     block.className = 'message-editor-block';
 
-    // 【핵심 수정 1】여기에 추가 'link' 템플릿
     const templates = {
         voice: { type: 'voice_message', content: '여기에 음성 내용을 입력하세요' },
         image: { type: 'ai_image', description: '여기에 이미지 설명을 입력하세요' },
@@ -7303,14 +7239,11 @@ function createMessageEditorBlock(initialContent = '') {
             <button class="format-btn" data-template='${JSON.stringify(templates.voice)}'>음성</button>
             <button class="format-btn" data-template='${JSON.stringify(templates.image)}'>이미지</button>
             <button class="format-btn" data-template='${JSON.stringify(templates.transfer)}'>송금</button>
-            <!-- 【핵심 수정 2】여기에 새로운\"링크를 추가\"버튼 -->
             <button class="format-btn" data-template='${JSON.stringify(templates.link)}'>링크를 추가</button>
         </div>
     `;
 
-    // 삭제 버튼 이벤트 바인딩
     block.querySelector('.delete-block-btn').addEventListener('click', () => {
-        // 적어도 하나의 편집 블록을 유지하도록 확인
         if (document.querySelectorAll('.message-editor-block').length > 1) {
             block.remove();
         } else {
@@ -7318,7 +7251,6 @@ function createMessageEditorBlock(initialContent = '') {
         }
     });
 
-    // 서식 도우미 버튼 이벤트 바인딩
     block.querySelectorAll('.format-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const templateStr = btn.dataset.template;
@@ -7335,30 +7267,22 @@ function createMessageEditorBlock(initialContent = '') {
 
     return block;
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-// ▼▼▼ 【완전 새로운 업그레이드 버전】이 함수로 이전 openAdvancedMessageEditor를 완전히 대체해 주세요 ▼▼▼
-/**
- * 완전히 새로운 시각적 다중 메시지 편집기를 열고, 모든 버튼 이벤트를 동적으로 바인딩합니다
- */
 function openAdvancedMessageEditor() {
     if (!activeMessageTimestamp) return;
 
-    // 1. 【핵심】이전 메뉴를 닫기 전에, 필요한 타임스탬프를 지역 변수에 캡처합니다
     const timestampToEdit = activeMessageTimestamp;
 
     const chat = state.chats[state.activeChatId];
     const message = chat.history.find(m => m.timestamp === timestampToEdit);
     if (!message) return;
 
-    // 2. 이제 이전 메뉴를 안전하게 닫을 수 있습니다, 우리의 지역 변수에 영향을 주지 않기 때문입니다
     hideMessageActions(); 
 
     const editorModal = document.getElementById('message-editor-modal');
     const editorContainer = document.getElementById('message-editor-container');
     editorContainer.innerHTML = ''; 
 
-    // 3. 초기 내용 준비
     let initialContent;
     const isSpecialType = message.type && ['voice_message', 'ai_image', 'transfer'].includes(message.type);
     if (isSpecialType) {
@@ -7379,8 +7303,6 @@ function openAdvancedMessageEditor() {
     const firstBlock = createMessageEditorBlock(initialContent);
     editorContainer.appendChild(firstBlock);
 
-    // 4. 【핵심】모든 제어 버튼의 이벤트를 동적으로 바인딩
-    // 이벤트 중복 바인딩을 방지하기 위해, 우리는 클론 노드 방식을 사용하여 이전 리스너를 제거합니다
     const addBtn = document.getElementById('add-message-editor-block-btn');
     const newAddBtn = addBtn.cloneNode(true);
     addBtn.parentNode.replaceChild(newAddBtn, addBtn);
@@ -7400,52 +7322,32 @@ function openAdvancedMessageEditor() {
     const saveBtn = document.getElementById('save-advanced-editor-btn');
     const newSaveBtn = saveBtn.cloneNode(true);
     saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
-    // 캡처된 타임스탬프를 이번 저장 클릭 이벤트에 직접 바인딩합니다
+
     newSaveBtn.addEventListener('click', () => {
         saveEditedMessage(timestampToEdit); 
     });
 
-    // 5. 마지막으로, 모달 창을 표시합니다
     editorModal.classList.add('visible');
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-/**
- * 편집된 텍스트를 파싱하고, 표준화된 메시지 조각 객체를 반환합니다
- * @param {string} text - 사용자가 편집 상자에 입력한 텍스트
- * @returns {object} - type, content 등의 속성을 포함하는 객체
- */
 function parseEditedContent(text) {
     const trimmedText = text.trim();
 
-    // 1. JSON 객체로 파싱 시도(음성, 송금 등 형식을 수정하는 데 사용)
     if (trimmedText.startsWith('{') && trimmedText.endsWith('}')) {
         try {
             const parsed = JSON.parse(trimmedText);
-            // type 속성을 포함해야 유효한 형식으로 간주됩니다
             if (parsed.type) {
                 return parsed;
             }
-        } catch (e) { /* 파싱 실패, 계속 진행 */ }
+        } catch (e) {  }
     }
     
-    // 2. 이모티콘으로 파싱 시도
     if (STICKER_REGEX.test(trimmedText)) {
-        // 편집된 이모티콘의 경우, 우리는 현재`meaning`,따라서 URL만 저장합니다
         return { type: 'sticker', content: trimmedText };
     }
-
-    // 3. 그렇지 않으면, 일반 텍스트 메시지로 간주합니다
     return { type: 'text', content: trimmedText };
 }
 
-
-// ▼▼▼ 이것을 사용하십시오【최종 호환 버전】함수로, 이전 saveEditedMessage 함수를 완전히 대체합니다 ▼▼▼
-/**
- * 편집된 메시지를 저장하고, 단순 편집기와 고급 편집기 모두 호환됩니다
- * @param {number} timestamp - 수정할 원본 메시지의 타임스탬프
- * @param {string} [simpleContent=null] - (선택 사항) 단순 편집기에서 전달된 단일 내용 문자열
- */
 async function saveEditedMessage(timestamp, simpleContent = null) {
     if (!timestamp) return;
 
@@ -7455,19 +7357,16 @@ async function saveEditedMessage(timestamp, simpleContent = null) {
 
     let newMessages = [];
 
-    // 고급 편집기에서 왔는지 또는 단순 편집기에서 왔는지 판단
     if (simpleContent !== null) {
-        // --- 단순 편집기에서 옴 ---
         const rawContent = simpleContent.trim();
         if (rawContent) {
             const parsedResult = parseEditedContent(rawContent);
             const newMessage = {
                 role: chat.history[messageIndex].role,
                 senderName: chat.history[messageIndex].senderName,
-                timestamp: timestamp, // 간단 편집, 타임스탬프는 변경되지 않습니다
+                timestamp: timestamp, 
                 content: parsedResult.content || '',
             };
-            // 다양한 가능한 속성 추가
             if (parsedResult.type && parsedResult.type !== 'text') newMessage.type = parsedResult.type;
             if (parsedResult.meaning) newMessage.meaning = parsedResult.meaning;
             if (parsedResult.amount) newMessage.amount = parsedResult.amount;
@@ -7479,7 +7378,6 @@ async function saveEditedMessage(timestamp, simpleContent = null) {
             newMessages.push(newMessage);
         }
     } else {
-        // --- 고급 편집기에서 옴 ---
         const editorContainer = document.getElementById('message-editor-container');
         const editorBlocks = editorContainer.querySelectorAll('.message-editor-block');
         let baseTimestamp = timestamp;
@@ -7497,7 +7395,6 @@ async function saveEditedMessage(timestamp, simpleContent = null) {
                 content: parsedResult.content || '',
             };
             
-            // 다양한 가능한 속성 추가
             if (parsedResult.type && parsedResult.type !== 'text') newMessage.type = parsedResult.type;
             if (parsedResult.meaning) newMessage.meaning = parsedResult.meaning;
             if (parsedResult.amount) newMessage.amount = parsedResult.amount;
@@ -7522,35 +7419,21 @@ async function saveEditedMessage(timestamp, simpleContent = null) {
     chat.history.splice(messageIndex, 1, ...newMessages);
     await db.chats.put(chat);
 
-    // 열려 있을 수 있는 모달 창을 닫고 UI를 새로 고칩니다
     document.getElementById('message-editor-modal').classList.remove('visible');
     renderChatInterface(state.activeChatId);
     await showCustomAlert('성공', '메시지가 업데이트되었습니다!');
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-// ▼▼▼ 이것을【새 함수 블록 전체를】JS 기능 함수 정의 영역의 끝에 붙여넣으세요 ▼▼▼
-
-/**
- * 클릭 시\"...\"다이내믹 작업 메뉴 표시
- * @param {number} postId - 작업 대상 다이내믹의 ID
- */
 function showPostActions(postId) {
     activePostId = postId;
     document.getElementById('post-actions-modal').classList.add('visible');
 }
 
-/**
- * 다이내믹 작업 메뉴 숨기기
- */
 function hidePostActions() {
     document.getElementById('post-actions-modal').classList.remove('visible');
     activePostId = null;
 }
 
-/**
- * 다이내믹 편집기 열기
- */
 async function openPostEditor() {
     if (!activePostId) return;
 
@@ -7560,12 +7443,10 @@ async function openPostEditor() {
 
     hidePostActions();
 
-    // 원본에 충실:편집을 위해 가장 원본 텍스트 형태를 구축
     let contentForEditing;
     if (post.type === 'shuoshuo') {
         contentForEditing = post.content;
     } else {
-        // 이미지와 텍스트 이미지의 경우, 모든 정보를 포함하는 객체를 구축합니다
         const postObject = {
             type: post.type,
             publicText: post.publicText || '',
@@ -7579,9 +7460,8 @@ async function openPostEditor() {
         contentForEditing = JSON.stringify(postObject, null, 2);
     }
     
-    // 서식 도우미 버튼 구축
     const templates = {
-        shuoshuo: "여기에 게시글 내용을 입력하세요...", // 게시글의 경우, 우리는 직접 일반 텍스트로 대체합니다
+        shuoshuo: "여기에 게시글 내용을 입력하세요...", 
         image: { type: 'image_post', publicText: '', imageUrl: 'https://...', imageDescription: '' },
         text_image: { type: 'text_image', publicText: '', hiddenContent: '' }
     };
@@ -7602,8 +7482,6 @@ async function openPostEditor() {
         helpersHtml
     );
     
-    // 【특수 처리】게시글의 서식 도우미 버튼에 다른 동작 추가
-    // 모달 창이 나타난 후에, 이벤트를 바인딩해야 합니다
     setTimeout(() => {
         const shuoshuoBtn = document.querySelector('#custom-modal-body .format-btn[data-type="text"]');
         if(shuoshuoBtn) {
@@ -7620,32 +7498,23 @@ async function openPostEditor() {
     }
 }
 
-/**
- * 편집된 다이내믹 저장
- * @param {number} postId - 저장할 다이내믹 ID
- * @param {string} newRawContent - 편집기에서 가져온 새 내용
- */
 async function saveEditedPost(postId, newRawContent) {
     const post = await db.qzonePosts.get(postId);
     if (!post) return;
 
     const trimmedContent = newRawContent.trim();
     
-    // JSON으로 파싱 시도, 실패하면 일반 텍스트로 간주(글)
     try {
         const parsed = JSON.parse(trimmedContent);
-        // 게시글 속성 업데이트
         post.type = parsed.type || 'image_post';
         post.publicText = parsed.publicText || '';
         post.imageUrl = parsed.imageUrl || '';
         post.imageDescription = parsed.imageDescription || '';
         post.hiddenContent = parsed.hiddenContent || '';
-        post.content = ''; // 이전 게시글 내용 필드 초기화
+        post.content = ''; 
     } catch (e) {
-        // 파싱 실패, 게시글로 간주
         post.type = 'shuoshuo';
         post.content = trimmedContent;
-        // 다른 유형의 필드 초기화
         post.publicText = '';
         post.imageUrl = '';
         post.imageDescription = '';
@@ -7653,13 +7522,10 @@ async function saveEditedPost(postId, newRawContent) {
     }
     
     await db.qzonePosts.put(post);
-    await renderQzonePosts(); // 목록 다시 렌더링
+    await renderQzonePosts(); 
     await showCustomAlert('성공', '다이내믹이 업데이트되었습니다!');
 }
 
-/**
- * 다이내믹 내용 복사
- */
 async function copyPostContent() {
     if (!activePostId) return;
     const post = await db.qzonePosts.get(activePostId);
@@ -7677,33 +7543,24 @@ async function copyPostContent() {
     hidePostActions();
 }
 
-// ▼▼▼ 【새로운】그룹 채팅 생성 및 초대 기능 핵심 함수 ▼▼▼
 let selectedContacts = new Set();
 
 async function openContactPickerForGroupCreate() {
-    selectedContacts.clear(); // 이전 선택 초기화
+    selectedContacts.clear(); 
 
-    // 【핵심 수정】여기에서, 우리는\"완료\"버튼에 명확하게 바인딩합니다\"그룹 채팅 생성\"기능을
     const confirmBtn = document.getElementById('confirm-contact-picker-btn');
-    // 클론 노드 기술을 사용하여 이전에 바인딩되었을 수 있는 다른 모든 이벤트를 제거합니다(예를 들어\"멤버 추가\")
     const newConfirmBtn = confirmBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
-    // 올바른 것을 다시 바인딩합니다\"그룹 채팅 생성\"함수
     newConfirmBtn.addEventListener('click', handleCreateGroup);
 
     await renderContactPicker();
     showScreen('contact-picker-screen');
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-/**
- * 연락처 선택 목록 렌더링
- */
 async function renderContactPicker() {
     const listEl = document.getElementById('contact-picker-list');
     listEl.innerHTML = '';
 
-    // 그룹 멤버 후보로 1:1 채팅 역할만 선택
     const contacts = Object.values(state.chats).filter(chat => !chat.isGroup);
 
     if (contacts.length === 0) {
@@ -7726,18 +7583,12 @@ async function renderContactPicker() {
     updateContactPickerConfirmButton();
 }
 
-/**
- * 업데이트\"완료\"버튼의 카운트
- */
 function updateContactPickerConfirmButton() {
     const btn = document.getElementById('confirm-contact-picker-btn');
     btn.textContent = `완료(${selectedContacts.size})`;
-    btn.disabled = selectedContacts.size < 2; // 그룹 채팅을 생성하려면 최소 2명 이상이 필요합니다
+    btn.disabled = selectedContacts.size < 2; 
 }
 
-/**
- * 그룹 채팅 생성 최종 로직 처리
- */
 async function handleCreateGroup() {
     if (selectedContacts.size < 2) {
         alert("그룹 채팅을 생성하려면 최소 2명의 연락처를 선택해야 합니다.");
@@ -7750,13 +7601,11 @@ async function handleCreateGroup() {
     const newChatId = 'group_' + Date.now();
     const members = [];
     
-    // 선택된 연락처 ID 순회
     for (const contactId of selectedContacts) {
         const contactChat = state.chats[contactId];
         if (contactChat) {
-            // 【핵심】1:1 채팅 설정에서 데이터를 추출하여 그룹 멤버 객체 생성
             members.push({
-                id: contactId, // 1:1 채팅의 ID를 멤버 ID로 사용하여 연결하기 쉽게 합니다
+                id: contactId, 
                 name: contactChat.name,
                 avatar: contactChat.settings.aiAvatar || defaultAvatar,
                 persona: contactChat.settings.aiPersona,
@@ -7793,24 +7642,14 @@ async function handleCreateGroup() {
     
     await renderChatList();
     showScreen('chat-list-screen');
-    openChat(newChatId); // 생성 후 바로 그룹 채팅 열기
-}
-// ▲▲▲ 새 함수 붙여넣기 종료 ▲▲▲
-
-// ▼▼▼ 【새로운】그룹 멤버 관리 핵심 함수 ▼▼▼
-
-/**
- * 그룹 멤버 관리 화면 열기
- */
+    openChat(newChatId); 
+    
 function openMemberManagementScreen() {
     if (!state.activeChatId || !state.chats[state.activeChatId].isGroup) return;
     renderMemberManagementList();
     showScreen('member-management-screen');
 }
 
-/**
- * 그룹 멤버 관리 목록 렌더링
- */
 function renderMemberManagementList() {
     const listEl = document.getElementById('member-management-list');
     const chat = state.chats[state.activeChatId];
@@ -7828,17 +7667,12 @@ function renderMemberManagementList() {
     });
 }
 
-/**
- * 그룹 채팅에서 멤버 한 명 제거
- * @param {string} memberId - 제거할 멤버 ID
- */
 async function removeMemberFromGroup(memberId) {
     const chat = state.chats[state.activeChatId];
     const memberIndex = chat.members.findIndex(m => m.id === memberId);
     
     if (memberIndex === -1) return;
     
-    // 보안 검사, 그룹 채팅은 최소 2명 유지
     if (chat.members.length <= 2) {
         alert("그룹 채팅 인원은 2명 미만일 수 없습니다.");
         return;
@@ -7854,28 +7688,23 @@ async function removeMemberFromGroup(memberId) {
     if (confirmed) {
         chat.members.splice(memberIndex, 1);
         await db.chats.put(chat);
-        renderMemberManagementList(); // 멤버 관리 목록 새로 고침
-        document.getElementById('chat-settings-btn').click(); // 【핵심 수정】설정 버튼 클릭을 시뮬레이션하여 전체 팝업을 강제로 새로 고칩니다
+        renderMemberManagementList(); 
+        document.getElementById('chat-settings-btn').click(); 
     }
 }
 
-/**
- * 그룹에 사람을 초대하기 위한 연락처 선택기 열기
- */
 async function openContactPickerForAddMember() {
-    selectedContacts.clear(); // 선택 초기화
+    selectedContacts.clear(); 
     
     const chat = state.chats[state.activeChatId];
     const existingMemberIds = new Set(chat.members.map(m => m.id));
-
-    // 연락처 목록을 렌더링하고, 이미 그룹에 있는 멤버는 자동으로 제외합니다
     const listEl = document.getElementById('contact-picker-list');
     listEl.innerHTML = '';
     const contacts = Object.values(state.chats).filter(c => !c.isGroup && !existingMemberIds.has(c.id));
 
     if (contacts.length === 0) {
         listEl.innerHTML = '<p style="text-align:center; color:#8a8a8a; margin-top:50px;">더 이상 초대할 친구가 없습니다.</p>';
-        document.getElementById('confirm-contact-picker-btn').style.display = 'none'; // 선택할 사람이 없습니다, 완료 버튼 숨기기
+        document.getElementById('confirm-contact-picker-btn').style.display = 'none'; 
     } else {
         document.getElementById('confirm-contact-picker-btn').style.display = 'block';
         contacts.forEach(contact => {
@@ -7890,15 +7719,10 @@ async function openContactPickerForAddMember() {
             listEl.appendChild(item);
         });
     }
-
-    // 버튼 상태 업데이트 및 화면 표시
     updateContactPickerConfirmButton();
     showScreen('contact-picker-screen');
 }
 
-/**
- * 선택된 연락처를 그룹 채팅에 추가하는 로직 처리
- */
 async function handleAddMembersToGroup() {
     if (selectedContacts.size === 0) {
         alert("적어도 한 명의 추가할 연락처를 선택해 주세요.");
@@ -7921,18 +7745,16 @@ async function handleAddMembersToGroup() {
     }
 
     await db.chats.put(chat);
-    openMemberManagementScreen(); // 그룹 멤버 관리 화면으로 돌아가기
-    renderGroupMemberSettings(chat.members); // 동시에 채팅 설정의 아바타도 업데이트합니다
+    openMemberManagementScreen(); 
+    renderGroupMemberSettings(chat.members); 
 }
 
-// ▼▼▼ 이것을 사용하십시오【최종 수정 버전】이전 createNewMemberInGroup 함수를 대체합니다 ▼▼▼
 async function createNewMemberInGroup() {
     const name = await showCustomPrompt('새 멤버 생성', '새 멤버의 이름을 입력해 주세요');
     if (!name || !name.trim()) return;
 
     const persona = await showCustomPrompt('페르소나 설정', `입력해 주세요\"${name}\"의 페르소나`, '', 'textarea');
-    if (persona === null) return; // 사용자가 취소를 클릭했습니다
-
+    if (persona === null) return; 
     const chat = state.chats[state.activeChatId];
     const newMember = {
         id: 'npc_' + Date.now(),
@@ -7944,17 +7766,11 @@ async function createNewMemberInGroup() {
 
     chat.members.push(newMember);
     await db.chats.put(chat);
-
-    // 【핵심 수정】여기에서, 우리는 현재 페이지의 목록을 새로 고칠 뿐만 아니라...
     renderMemberManagementList();
-    // 【핵심 수정】...뒤에 있는 것을 수동으로 새로 고칩니다\"채팅 설정\"팝업 창의 멤버 아바타 목록을!
     renderGroupMemberSettings(chat.members); 
-
     alert(`새 멤버가\"${name}\"그룹 채팅에 성공적으로 추가되었습니다!`);
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-// ▼▼▼ 【새로운】배달 요청 카운트다운 함수 ▼▼▼
 function startWaimaiCountdown(element, endTime) {
     const timerId = setInterval(() => {
         const now = Date.now();
@@ -7983,7 +7799,6 @@ function cleanupWaimaiTimers() {
     }
     waimaiTimers = {};
 }
-// ▲▲▲ 새 함수 붙여넣기 종료 ▲▲▲
 
 async function handleWaimaiResponse(originalTimestamp, choice) {
     const chat = state.chats[state.activeChatId];
@@ -7991,23 +7806,18 @@ async function handleWaimaiResponse(originalTimestamp, choice) {
 
     const messageIndex = chat.history.findIndex(m => m.timestamp === originalTimestamp);
     if (messageIndex === -1) return;
-
-    // 1. 원본 메시지 상태 업데이트
     const originalMessage = chat.history[messageIndex];
     originalMessage.status = choice;
-    
-    // 【핵심 수정】지불자를 기록하고, AI에 더 명확한 시스템 메시지를 구축합니다
     let systemContent;
     const myNickname = chat.isGroup ? (chat.settings.myNickname || '내') : '내';
     
     if (choice === 'paid') {
-        originalMessage.paidBy = myNickname; // 사용자가 지불한 돈을 기록합니다
+        originalMessage.paidBy = myNickname; 
         systemContent = `[시스템 알림:당신 (${myNickname}) ${originalMessage.senderName} 님의 배달 주문에 대해(타임스탬프: ${originalTimestamp})결제가 완료되었습니다. 이 주문은 마감되었으며, 다른 멤버는 더 이상 결제할 수 없습니다.]`;
     } else {
         systemContent = `[시스템 알림:당신 (${myNickname}) ${originalMessage.senderName} 님의 배달 대리 결제 요청을 거절했습니다(타임스탬프: ${originalTimestamp}).]`;
     }
 
-    // 2. 새로운, 사용자에게 숨겨진 시스템 메시지를 생성하여 AI에게 결과를 알립니다
     const systemNote = {
         role: 'system',
         content: systemContent,
@@ -8016,11 +7826,9 @@ async function handleWaimaiResponse(originalTimestamp, choice) {
     };
     chat.history.push(systemNote);
 
-    // 3. 데이터베이스에 업데이트를 저장하고 UI 새로 고침
     await db.chats.put(chat);
     renderChatInterface(state.activeChatId);
     
-    // 4. 【선택 사항이지만 권장】결제 성공 후, AI 응답을 한 번 주동적으로 트리거합니다
     if (choice === 'paid') {
         triggerAiResponse();
     }
@@ -8035,16 +7843,11 @@ let videoCallState = {
     startTime: null,       
     participants: [],      
     isUserParticipating: true,
-    // --- 【핵심 추가】---
-    callHistory: [], // 통화 중 대화 기록을 저장하는 데 사용
-    preCallContext: "" // 통화 전 채팅 요약을 저장하는 데 사용
+    callHistory: [], 
+    preCallContext: "" 
 };
 
-let callTimerInterval = null; // 타이머 ID를 저장하는 데 사용
-
-/**
- * 【총 진입 지점】사용자 클릭\"화상 통화 시작\"또는\"그룹 영상 통화 시작\"버튼
- */
+let callTimerInterval = null; 
 async function handleInitiateCall() {
     if (!state.activeChatId || videoCallState.isActive || videoCallState.isAwaitingResponse) return;
 
@@ -8053,9 +7856,8 @@ async function handleInitiateCall() {
     videoCallState.isAwaitingResponse = true;
     videoCallState.initiator = 'user';
     videoCallState.activeChatId = chat.id;
-    videoCallState.isUserParticipating = true; // 사용자가 직접 시작한 것이므로, 당연히 참여자입니다
-
-    // 1:1 채팅인지 그룹 채팅인지에 따라 다른 통화 화면을 표시합니다
+    videoCallState.isUserParticipating = true; 
+    
     if (chat.isGroup) {
         document.getElementById('outgoing-call-avatar').src = chat.settings.myAvatar || defaultMyGroupAvatar;
         document.getElementById('outgoing-call-name').textContent = chat.settings.myNickname || '내';
@@ -8066,7 +7868,6 @@ async function handleInitiateCall() {
     document.querySelector('#outgoing-call-screen .caller-text').textContent = chat.isGroup ? "모든 멤버에게 호출 중..." : "통화 중...";
     showScreen('outgoing-call-screen');
     
-    // 시스템 메시지를 준비하여 AI에게 보냅니다
     const requestMessage = {
         role: 'system',
         content: chat.isGroup 
@@ -8078,10 +7879,8 @@ async function handleInitiateCall() {
     chat.history.push(requestMessage);
     await db.chats.put(chat);
     
-    // 트리거 AI 응답
     await triggerAiResponse();
 }
-
 
 function startVideoCall() {
     const chat = state.chats[videoCallState.activeChatId];
@@ -8090,21 +7889,18 @@ function startVideoCall() {
     videoCallState.isActive = true;
     videoCallState.isAwaitingResponse = false;
     videoCallState.startTime = Date.now();
-    videoCallState.callHistory = []; // 【새로 추가】지난 통화 기록 비우기
-
-    // --- 【핵심 추가:통화 전 맥락 가져오기】---
-    const preCallHistory = chat.history.slice(-5); // 마지막 5개를 맥락으로 가져오기
+    videoCallState.callHistory = []; 
+    
+    const preCallHistory = chat.history.slice(-5); 
     videoCallState.preCallContext = preCallHistory.map(msg => {
         const sender = msg.role === 'user' ? (chat.settings.myNickname || '내') : (msg.senderName || chat.name);
         return `${sender}: ${String(msg.content).substring(0, 50)}...`;
     }).join('\n');
-    // --- 새로운 추가 끝 ---
 
     updateParticipantAvatars(); 
     
     document.getElementById('video-call-main').innerHTML = `<em>${videoCallState.isGroupCall ? '그룹 통화가 설정되었습니다...' : '연결 중...'}</em>`;
     showScreen('video-call-screen');
-
     document.getElementById('user-speak-btn').style.display = videoCallState.isUserParticipating ? 'block' : 'none';
     document.getElementById('join-call-btn').style.display = videoCallState.isUserParticipating ? 'none' : 'block';
 
@@ -8115,12 +7911,8 @@ function startVideoCall() {
     triggerAiInCallAction();
 }
 
-/**
- * 【핵심】영상 통화 종료
- */
 async function endVideoCall() {
     if (!videoCallState.isActive) return;
-
     const duration = Math.floor((Date.now() - videoCallState.startTime) / 1000);
     const minutes = Math.floor(duration / 60);
     const seconds = duration % 60;
@@ -8130,23 +7922,17 @@ async function endVideoCall() {
     const chat = state.chats[videoCallState.activeChatId];
     if (chat) {
         
-        // --- 【핵심 재구성:통화 요약 메시지 생성】 ---
         let summaryMessage = {
             role: videoCallState.initiator === 'user' ? 'user' : 'assistant',
             content: endCallText,
             timestamp: Date.now(),
         };
 
-        // 【핵심】그룹 통화의 assistant 메시지에 발신자 이름 추가
         if (chat.isGroup && summaryMessage.role === 'assistant') {
-            // 그룹 통화에서, 통화 종료 메시지는\"발신자\"말해야 합니다
-            // videoCallState.callRequester 처음 통화를 시작한 AI의 이름을 저장했습니다
             summaryMessage.senderName = videoCallState.callRequester || chat.members[0]?.name || chat.name;
         }
         
         chat.history.push(summaryMessage);
-
-        // --- 【핵심 재구성:통화 요약 트리거】---
         const callSummaryPrompt = `
 # 당신의 임무
 당신은 대화 요약 도우미입니다. 다음은\"통화 기록\"방금 종료된 영상 통화 내용입니다. 당신은 1-2문장으로, 이번 통화의 핵심 내용 또는 달성된 합의를 간결하게 요약해 주세요.
@@ -8182,24 +7968,18 @@ ${videoCallState.callHistory.map(h => `${h.role}: ${h.content}`).join('\n')}
         } catch (e) {
             console.error("통화 요약 실패:", e);
         }
-
         await db.chats.put(chat);
     }
     
-    // 정리 및 재설정
     clearInterval(callTimerInterval);
     callTimerInterval = null;
     videoCallState = { isActive: false, isAwaitingResponse: false, isGroupCall: false, activeChatId: null, initiator: null, startTime: null, participants: [], isUserParticipating: true, callHistory: [], preCallContext: "" };
     
-    // 【중요】모든 작업이 완료된 후 채팅을 다시 열어 주세요
     if (chat) {
         openChat(chat.id);
     }
 }
 
-/**
- * 【새로운】통화 화면의 참여자 아바타 그리드 업데이트
- */
 function updateParticipantAvatars() {
     const grid = document.getElementById('participant-avatars-grid');
     grid.innerHTML = '';
@@ -8207,12 +7987,9 @@ function updateParticipantAvatars() {
     if (!chat) return;
 
     let participantsToRender = [];
-
-    // ★ 핵심 수정:그룹 통화와 1:1 통화 구분
     if (videoCallState.isGroupCall) {
-        // 그룹 통화 로직:모든 참여한 AI 멤버 표시
         participantsToRender = [...videoCallState.participants];
-        // 만약 사용자가 참여했다면, 사용자 정보도 추가하세요
+
         if (videoCallState.isUserParticipating) {
             participantsToRender.unshift({
                 id: 'user',
@@ -8221,7 +7998,6 @@ function updateParticipantAvatars() {
             });
         }
     } else {
-        // 1:1 채팅 로직:상대방의 아바타와 이름만 표시
         participantsToRender.push({
             id: 'ai',
             name: chat.name,
@@ -8241,27 +8017,17 @@ function updateParticipantAvatars() {
     });
 }
 
-/**
- * 【새로운】사용자 참여 처리/통화에 다시 참여
- */
 function handleUserJoinCall() {
     if (!videoCallState.isActive || videoCallState.isUserParticipating) return;
     
     videoCallState.isUserParticipating = true;
-    updateParticipantAvatars(); // 아바타 목록 업데이트, 사용자 추가
-
-    // 하단 버튼 전환
+    updateParticipantAvatars(); 
     document.getElementById('user-speak-btn').style.display = 'block';
     document.getElementById('join-call-btn').style.display = 'none';
 
-    // AI에게 사용자가 참여했음을 알림
     triggerAiInCallAction("[시스템 알림:사용자가 통화에 참여했습니다]");
 }
 
-
-/**
- * 통화 타이머 표시 업데이트 (그대로 유지)
- */
 function updateCallTimer() {
     if (!videoCallState.isActive) return;
     const elapsed = Math.floor((Date.now() - videoCallState.startTime) / 1000);
@@ -8270,20 +8036,15 @@ function updateCallTimer() {
     document.getElementById('call-timer').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
-// ▼▼▼ 이 전체 함수로 기존의 showIncomingCallModal 교체 ▼▼▼
 function showIncomingCallModal() {
     const chat = state.chats[state.activeChatId];
     if (!chat) return;
-
-    // 그룹 통화 여부에 따라 다른 정보 표시
     if (chat.isGroup) {
-        // videoCallState 에서 어떤 멤버가 통화를 시작했는지 가져오기
         const requesterName = videoCallState.callRequester || chat.members[0]?.name || '한 멤버';
         document.getElementById('caller-avatar').src = chat.settings.groupAvatar || defaultGroupAvatar;
-        document.getElementById('caller-name').textContent = chat.name; // 그룹 이름 표시
-        document.querySelector('.incoming-call-content .caller-text').textContent = `${requesterName} 당신을 그룹 영상에 초대`; // 특정 발신자 표시
+        document.getElementById('caller-name').textContent = chat.name; 
+        document.querySelector('.incoming-call-content .caller-text').textContent = `${requesterName} 당신을 그룹 영상에 초대`; 
     } else {
-        // 1:1 통화 로직 변경 없음
         document.getElementById('caller-avatar').src = chat.settings.aiAvatar || defaultAvatar;
         document.getElementById('caller-name').textContent = chat.name;
         document.querySelector('.incoming-call-content .caller-text').textContent = '영상 통화에 초대합니다';
@@ -8291,11 +8052,7 @@ function showIncomingCallModal() {
     
     document.getElementById('incoming-call-modal').classList.add('visible');
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-/**
- * AI가 시작한 통화 요청 모달 창 숨기기 (그대로 유지)
- */
 function hideIncomingCallModal() {
     document.getElementById('incoming-call-modal').classList.remove('visible');
 }
@@ -8308,7 +8065,6 @@ async function triggerAiInCallAction(userInput = null) {
     const callFeed = document.getElementById('video-call-main');
     const userNickname = chat.settings.myNickname || '내';
 
-    // 1. 만약 사용자가 입력했다면, 먼저 렌더링 및 통화 기록에 저장
     if (userInput && videoCallState.isUserParticipating) {
         const userBubble = document.createElement('div');
         userBubble.className = 'call-message-bubble user-speech';
@@ -8318,7 +8074,6 @@ async function triggerAiInCallAction(userInput = null) {
         videoCallState.callHistory.push({ role: 'user', content: userInput });
     }
 
-    // 2. 완전히 새로운, 완전한 맥락을 포함하는 System Prompt 구축
     let inCallPrompt;
     if (videoCallState.isGroupCall) {
         const participantNames = videoCallState.participants.map(p => p.name);
@@ -8360,7 +8115,6 @@ ${videoCallState.preCallContext}
 `;
     }
     
-    // 3. API로 전송할 messages 배열 구축
     const messagesForApi = [
         { role: 'system', content: inCallPrompt },
         // 기존 통화 기록 추가
