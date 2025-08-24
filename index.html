@@ -63,7 +63,7 @@ body {
 
 /* ▲▲▲ 대체 끝 ▲▲▲ */
 
-        #status-bar { position: absolute; top: 0; left: 0; width: 100%; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; color: white; z-index: 10; font-size: 14px; box-sizing: border-box; pointer-events: none; }
+        #status-bar { position: absolute; top: 0; left: 0; width: 100%; padding: 0px 20px 12px 20px; display: flex; justify-content: space-between; align-items: center; color: white; z-index: 10; font-size: 14px; box-sizing: border-box; pointer-events: none; }
         #status-bar-time { font-weight: 600; }
         .battery-container { display: flex; align-items: center; gap: 5px; }
         .battery-icon { width: 25px; height: 12px; border: 1px solid white; border-radius: 3px; position: relative; padding: 1px; }
@@ -590,6 +590,7 @@ body {
 #chat-list-bottom-nav {
     position: absolute; /* 하단에 고정 */
     bottom: 0;
+	padding-bottom: 50px;
     left: 0;
     width: 100%;
     z-index: 15; /* 뷰 위에 있는지 확인 */
