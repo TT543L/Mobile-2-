@@ -166,19 +166,16 @@ body {
     max-width: 90%; 
 }
 
-/* 2. AI메시지 단위 왼쪽 정렬 */
 .message-wrapper.ai {
     align-self: flex-start;
-    flex-direction: row; /* 아바타, 기포, 타임스탬프, 왼쪽에서 오른쪽으로 정렬 */
+    flex-direction: row; 
 }
 
-/* 3. 사용자 메시지 단위 오른쪽 정렬 */
 .message-wrapper.user {
     align-self: flex-end;
-    flex-direction: row-reverse; /* 타임스탬프, 기포, 아바타, 오른쪽에서 왼쪽으로 정렬 */
+    flex-direction: row-reverse; 
 }
 
-/* 4. 기포와 아바타의 직접적인 컨테이너 (그대로 유지) */
 .message-bubble {
     display: flex;
     align-items: flex-start;
@@ -187,13 +184,12 @@ body {
 }
 
 .timestamp {
-    /* 이전 position 제거: absolute */
     font-size: 11px;
     color: #999;
     text-shadow: 0 0 3px rgba(255,255,255,0.6);
-    white-space: nowrap; /* 시간 줄 바꿈 방지 */
-    margin-bottom: 5px;  /* 기포 하단과 약간의 정렬 오프셋을 두어 더 미려하게 만듭니다 */
-    flex-shrink: 0;      /* 압축 방지 */
+    white-space: nowrap; 
+    margin-bottom: 5px;  
+    flex-shrink: 0; 
 }
 
         .message-bubble.selected::after { content: '✔'; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); background-color: var(--accent-color); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
@@ -231,7 +227,6 @@ body {
     visibility: hidden;
 }
 #notification-bar.visible {
-    /* 핵심:Y축에서 원래 위치로 돌아오면서, X축의 중앙 정렬 변환 유지 */
     transform: translateX(-50%) translateY(0);
     visibility: visible;
 }
@@ -282,9 +277,8 @@ body {
 .checkboxes-container {
     display: none;
     position: absolute;
-    /* 핵심 수정:더 이상 top을 사용하지 않고 margin을 사용합니다-top 으로 간격을 만들어 더 안정적입니다 */
     top: 100%; 
-    margin-top: 5px; /* <-- 새로 추가:아래로 5픽셀 밀어내는 거리 */
+    margin-top: 5px; 
     left: 0;
     right: 0;
     max-height: 150px;
@@ -301,11 +295,11 @@ body {
 
 .checkboxes-container label {
     display: block;
-    padding: 12px 15px; /* <-- 수정:상하좌우 패딩을 늘려 각 줄을 더 높고 넓게 만듭니다 */
+    padding: 12px 15px; 
     cursor: pointer;
     font-weight: normal;
     color: var(--text-primary);
-    font-size: 15px; /* <-- 새로 추가:글꼴 크기를 기본값에서 15px로 확대 */
+    font-size: 15px; 
 }
 
         .checkboxes-container input { margin-right: 10px; vertical-align: middle; }
@@ -323,26 +317,20 @@ body {
         @keyframes wave-quiet { 0%, 100% { height: 2px; } 50% { height: 10px; } }
         .voice-waveform div:nth-child(2) { animation-delay: 0.2s; } .voice-waveform div:nth-child(3) { animation-delay: 0.4s; } .voice-waveform div:nth-child(4) { animation-delay: 0.6s; } .voice-waveform div:nth-child(5) { animation-delay: 0.8s; }
 .voice-duration {
-    /* --- 핵심 수정 --- */
     font-size: var(--chat-font-size, 13px);
-    /* --- 수정 끝 --- */
     font-weight: 500;
     color: var(--text-secondary);
 }
         .message-bubble.user .voice-duration { color: #3e6224; }
 
-/* ▼▼▼ 이 코드로 원래의 .message를 대체하세요-bubble .content 스타일 ▼▼▼ */
-/* 일반 콘텐츠 영역 스타일, 타임스탬프 및 글꼴 크기 준비 */
 .message-bubble .content {
     position: relative;
     font-size: var(--chat-font-size, 16px);
     padding: 8px 12px;
     line-height: 1.5;
-    word-break: break-word; /* 핵심 수정: 긴 단어 또는 URL 강제 줄 바꿈, 기포 터짐 방지 */
+    word-break: break-word; 
 }
-/* ▲▲▲ 대체 끝 ▲▲▲ */
 
-        /* === 기포 테마 스타일 === */
         .message-bubble.user .content { background-color: rgba(255, 255, 255, 0.75); color: #585858; border-radius: 8px 2px 8px 8px; }
         .message-bubble.ai .content { background-color: rgba(255, 255, 255, 0.7); color: #585858; border-radius: 2px 8px 8px 8px; }
       
@@ -455,7 +443,6 @@ body {
         #battery-alert-image { max-width: 100px; max-height: 100px; margin-bottom: 15px; }
         #battery-alert-text { font-size: 16px; font-weight: 500; color: #333; margin: 0; line-height: 1.4; }
 
-/* === 아바타 프레임 선택 모달 창 스타일 (새로 추가된 것입니다) === */
 .change-frame-btn {
     padding: 6px 10px;
     border: 1px solid #ccc;
@@ -467,7 +454,7 @@ body {
 }
 
 #avatar-frame-modal .modal-content {
-    height: 70%; /* 창을 좀 더 높게 만드세요 */
+    height: 70%; 
 }
 
 #avatar-frame-modal .modal-body {
@@ -505,12 +492,12 @@ body {
 
 .frame-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); /* 각 행 자동 채우기, 최소 70px 너비 */
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); 
     gap: 15px;
 }
 
 .frame-item {
-    aspect-ratio: 1 / 1; /* 정사각형 유지 */
+    aspect-ratio: 1 / 1; 
     border: 2px solid transparent;
     border-radius: 10px;
     cursor: pointer;
@@ -519,7 +506,7 @@ body {
     background-position: center;
     padding: 5px;
     transition: all 0.2s ease;
-    position: relative; /* 미리보기 이미지 준비 */
+    position: relative; 
 }
 
 .frame-item.selected {
@@ -542,11 +529,9 @@ body {
     height: 100%;
 }
 
-/* 이것은 당신이 추가할 새 스타일입니다 */
 #font-preview {
     transition: font-family 0.3s ease;}
 
-/* === 채팅 목록 화면 새 스타일 (새로 추가된 것입니다) === */
 #chat-list-screen {
 }
 
@@ -573,14 +558,13 @@ body {
     overflow-y: auto; 
 }
 
-/* 하단 내비게이션 바 스타일 */
 #chat-list-bottom-nav {
-    position: absolute; /* 하단에 고정 */
+    position: absolute; 
     bottom: 0;
 	padding-bottom: 50px;
     left: 0;
     width: 100%;
-    z-index: 15; /* 뷰 위에 있는지 확인 */
+    z-index: 15; 
     display: flex;
     border-top: 1px solid var(--border-color);
     background-color: rgba(247, 247, 247, 0.9);
@@ -603,16 +587,14 @@ body {
     font-weight: 600;
 }
 
-/* === 피드 화면 (QZone) 스타일 (새로 추가된 것입니다) === */
 #qzone-screen {
     background-color: #f0f2f5;
 }
 
 .qzone-header {
-    /* position: absolute;  <-- 이것을 relative로 변경하세요 */
     position: relative;
-    z-index: 10; /* z-index 유지, 또는 더 높게 할 수 있습니다 */
-    flex-shrink: 0; /* 압축 방지 */
+    z-index: 10; 
+    flex-shrink: 0; 
     padding: 15px 20px;
     padding-top: 45px;
     background-color: rgba(247, 247, 247, 0.7); 
@@ -633,7 +615,7 @@ body {
     color: var(--accent-color);
 }
 
-.qzone-header span:nth-child(2) { /* "친구 피드"텍스트 */
+.qzone-header span:nth-child(2) { 
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -642,7 +624,6 @@ body {
 .qzone-content {
     flex-grow: 1;
     overflow-y: auto;
-    /* padding-top: 80px;  <-- 이것을 삭제하세요, header가 더 이상 absolute가 아니므로 */
 }
 
 .qzone-profile-header {
@@ -652,7 +633,7 @@ body {
 
 .qzone-banner-container {
     width: 100%;
-    height: 180px; /* 배경판 높이 */
+    height: 180px; 
     position: relative;
 }
 
@@ -664,10 +645,10 @@ body {
 
 .qzone-user-info {
     position: absolute;
-    bottom: -30px; /* 아바타와 닉네임 영역을 아래로 오프셋하여, 절반은 배경판 안에, 절반은 밖에 있도록 합니다 */
+    bottom: -30px; 
     left: 20px;
     display: flex;
-    align-items: flex-end; /* 닉네임과 아바타 하단 정렬 */
+    align-items: flex-end; 
     gap: 10px;
 }
 
@@ -689,10 +670,9 @@ body {
     font-weight: 600;
     color: #fff;
     text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    padding-bottom: 5px; /* 위치 미세 조정 */
+    padding-bottom: 5px; 
 }
 
-/* 편집 버튼의 일반 스타일 */
 .qzone-edit-btn {
     position: absolute;
     background-color: rgba(0,0,0,0.4);
@@ -719,37 +699,34 @@ body {
 #change-qzone-nickname-btn {
     font-size: 14px;
     padding: 2px 6px;
-    margin-left: 5px; /* 닉네임과의 간격 */
+    margin-left: 5px; 
     color: var(--text-primary);
     background-color: rgba(255,255,255,0.7);
     border-radius: 5px;
-    position: relative; /* Flex 레이아웃에서 벗어난 정렬 */
-    bottom: 5px; /* 수직 위치 미세 조정 */
+    position: relative; 
+    bottom: 5px; 
 }
 
-/* === 편집 기능을 더\"숨기기\" === */
 #qzone-banner-container,
 #qzone-avatar-container,
 #qzone-nickname {
-    cursor: pointer; /* 마우스 호버 시 클릭 가능한 제스처로 표시 */
+    cursor: pointer; 
     transition: opacity 0.2s;
 }
 #qzone-banner-container:hover,
 #qzone-avatar-container:hover,
 #qzone-nickname:hover {
-    opacity: 0.85; /* 호버 시 약간 어둡게 하여 사용자에게 피드백 제공 */
+    opacity: 0.85; 
 }
-/* 이전의 독립적인 편집 버튼 숨기기 */
+
 .qzone-edit-btn {
     display: none;
 }
 
-/* === Header와 Bottom Nav의 표시/숨김 제어 === */
-/* 기본적으로 피드 화면의 Header 숨김 */
 #qzone-screen .qzone-header {
     display: none;
 }
-/* 피드 뷰가 활성화될 때, 해당 Header 표시 */
+/* 피드 뷰가 활성화될 때, 해당 header 표시 */
 #qzone-screen.active .qzone-header {
     display: flex;
 }
