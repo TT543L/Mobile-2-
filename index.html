@@ -4316,7 +4316,7 @@ body {
                     <label>축하 메시지</label>
                     <input type="text" id="rp-group-greeting" placeholder="부자 되세요, 만사형통하세요!">
                 </div>
-                <p id="rp-group-total" style="text-align: center; font-size: 24px; font-weight: bold; margin: 10px 0;">¥ 0.00</p>
+                <p id="rp-group-total" style="text-align: center; font-size: 24px; font-weight: bold; margin: 10px 0;">₩ 0.00</p>
                 <button id="send-group-packet-btn" class="form-button">빨간 봉투에 돈 넣기</button>
             </div>
 
@@ -4334,7 +4334,7 @@ body {
                     <label>축하 메시지</label>
                     <input type="text" id="rp-direct-greeting" placeholder="부자 되세요, 만사형통하세요!">
                 </div>
-                 <p id="rp-direct-total" style="text-align: center; font-size: 24px; font-weight: bold; margin: 10px 0;">¥ 0.00</p>
+                 <p id="rp-direct-total" style="text-align: center; font-size: 24px; font-weight: bold; margin: 10px 0;">₩ 0.00</p>
                 <button id="send-direct-packet-btn" class="form-button">빨간 봉투에 돈 넣기</button>
             </div>
         </div>
@@ -5917,7 +5917,7 @@ function createMessageElement(msg, chat) {
         contentHtml = `
             <div class="transfer-card">
                 <div class="transfer-title">${heartIcon} ${titleText}</div>
-                <div class="transfer-amount">¥ ${Number(msg.amount).toFixed(2)}</div>
+                <div class="transfer-amount">₩ ${Number(msg.amount).toFixed(2)}</div>
                 <div class="transfer-note">${noteText}</div>
             </div>
         `;
@@ -5948,7 +5948,7 @@ function createMessageElement(msg, chat) {
                     <div class="request-title">${requestTitle}</div>
                     <div class="payment-box">
                         <div class="payment-label">지불 필요</div>
-                        <div class="amount">¥${Number(msg.amount).toFixed(2)}</div>
+                        <div class="amount">₩ ${Number(msg.amount).toFixed(2)}</div>
                         <div class="countdown-label">남은 결제 시간
                             <div class="countdown-timer" id="waimai-timer-${msg.timestamp}"></div>
                         </div>
@@ -5973,7 +5973,7 @@ function createMessageElement(msg, chat) {
                 detailsBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const paidByText = msg.paidBy ? `<br><br><b>상태:</b>${msg.paidBy} 님께서 성공적으로 대리 결제해 주셨습니다` : '';
-                    showCustomAlert('주문 상세 정보', `<b>상품:</b>${msg.productInfo}<br><b>금액:</b>¥${Number(msg.amount).toFixed(2)}${paidByText}`);
+                    showCustomAlert('주문 상세 정보', `<b>상품:</b>${msg.productInfo}<br><b>금액:</b>₩ ${Number(msg.amount).toFixed(2)}${paidByText}`);
                 });
             }
             const actionButtons = document.querySelectorAll(`.message-bubble[data-timestamp="${msg.timestamp}"] .waimai-user-actions button`);
@@ -9587,8 +9587,8 @@ function openRedPacketModal() {
     document.getElementById('rp-group-greeting').value = '';
     document.getElementById('rp-direct-amount').value = '';
     document.getElementById('rp-direct-greeting').value = '';
-    document.getElementById('rp-group-total').textContent = '¥ 0.00';
-    document.getElementById('rp-direct-total').textContent = '¥ 0.00';
+    document.getElementById('rp-group-total').textContent = '₩ 0.00';
+    document.getElementById('rp-direct-total').textContent = '₩ 0.00';
 
     
     const receiverSelect = document.getElementById('rp-direct-receiver');
@@ -9622,7 +9622,7 @@ async function sendGroupRedPacket() {
         alert("유효한 선물 봉투 개수를 입력해 주세요!"); return;
     }
     if (amount / count < 0.01) {
-        alert("개별 선물 봉투 금액은 0.01위안보다 적을 수 없습니다!"); return;
+        alert("개별 선물 봉투 금액은 0.01 원보다 적을 수 없습니다!"); return;
     }
 
     const myNickname = chat.settings.myNickname || '내';
@@ -9717,7 +9717,7 @@ async function handlePacketClick(timestamp) {
             renderChatInterface(currentChatId);
             
             
-            await showCustomAlert("축하합니다!", `당신은 ${packet.senderName} 님의 선물 봉투를 ${claimedAmount.toFixed(2)} 위안 수령했습니다.`);
+            await showCustomAlert("축하합니다!", `당신은 ${packet.senderName} 님의 선물 봉투를 ${claimedAmount.toFixed(2)} 원 수령했습니다.`);
         }
 
         
@@ -12035,42 +12035,32 @@ rpTabDirect.addEventListener('click', () => {
 
 document.getElementById('rp-group-amount').addEventListener('input', (e) => {
     const amount = parseFloat(e.target.value) || 0;
-    document.getElementById('rp-group-total').textContent = `¥ ${amount.toFixed(2)}`;
+    document.getElementById('rp-group-total').textContent = `₩ ${amount.toFixed(2)}`;
 });
 document.getElementById('rp-direct-amount').addEventListener('input', (e) => {
     const amount = parseFloat(e.target.value) || 0;
-    document.getElementById('rp-direct-total').textContent = `¥ ${amount.toFixed(2)}`;
+    document.getElementById('rp-direct-total').textContent = `₩ ${amount.toFixed(2)}`;
 });
-
-
-
 
 document.getElementById('chat-messages').addEventListener('click', (e) => {
     
     const packetCard = e.target.closest('.red-packet-card');
     if (!packetCard) return; 
-
     
     const messageBubble = packetCard.closest('.message-bubble');
     if (!messageBubble || !messageBubble.dataset.timestamp) return;
-
     
     const timestamp = parseInt(messageBubble.dataset.timestamp);
     handlePacketClick(timestamp);
 });
 
-
-
-
 document.getElementById('send-poll-btn').addEventListener('click', openCreatePollModal);
-
 
 document.getElementById('add-poll-option-btn').addEventListener('click', addPollOptionInput);
 document.getElementById('cancel-create-poll-btn').addEventListener('click', () => {
     document.getElementById('create-poll-modal').classList.remove('visible');
 });
 document.getElementById('confirm-create-poll-btn').addEventListener('click', sendPoll);
-
 
 document.getElementById('chat-messages').addEventListener('click', (e) => {
     const pollCard = e.target.closest('.poll-card');
@@ -12096,27 +12086,21 @@ document.getElementById('chat-messages').addEventListener('click', (e) => {
         }
         return;
     }
-
     
     if (pollCard.classList.contains('closed')) {
         showPollResults(timestamp);
     }
 });
-
-
   
 document.getElementById('manage-ai-avatar-library-btn').addEventListener('click', openAiAvatarLibraryModal);
 document.getElementById('add-ai-avatar-btn').addEventListener('click', addAvatarToLibrary);
 document.getElementById('close-ai-avatar-library-btn').addEventListener('click', closeAiAvatarLibraryModal);
-
-
 
 document.getElementById('icon-settings-grid').addEventListener('click', async (e) => {
     if (e.target.classList.contains('change-icon-btn')) {
         const item = e.target.closest('.icon-setting-item');
         const iconId = item.dataset.iconId;
         if (!iconId) return;
-
         const currentUrl = state.globalSettings.appIcons[iconId];
         const newUrl = await showCustomPrompt(`변경\"${item.querySelector('.icon-preview').alt}\"아이콘`, '새로운 이미지 URL을 입력해 주세요', currentUrl, 'url');
 
@@ -12131,9 +12115,6 @@ document.getElementById('icon-settings-grid').addEventListener('click', async (e
     }
 });
 
-
-
-
     document.getElementById('chat-messages').addEventListener('click', (e) => {
         
         const linkCard = e.target.closest('.link-share-card');
@@ -12144,35 +12125,21 @@ document.getElementById('icon-settings-grid').addEventListener('click', async (e
             }
         }
     });
-
     
     document.getElementById('browser-back-btn').addEventListener('click', () => {
         showScreen('chat-interface-screen');
     });
-
-
-
-
-
     
     document.getElementById('share-link-btn').addEventListener('click', openShareLinkModal);
-
     
     document.getElementById('cancel-share-link-btn').addEventListener('click', () => {
         document.getElementById('share-link-modal').classList.remove('visible');
     });
-
     
     document.getElementById('confirm-share-link-btn').addEventListener('click', sendUserLinkShare);
-
-
-
-        
-        
             
             showScreen('home-screen');
         }
-
         init();
     });
 </script>
