@@ -8239,25 +8239,15 @@ async function handleWaimaiResponse(originalTimestamp, choice) {
         triggerAiResponse();
     }
 }
-// ▲▲▲ 새 함수 붙여넣기 종료 ▲▲▲
 
-/**
- * 【새로운】사용자가 아바타를 클릭하여 시작되는 처리\"톡-톡\",사용자 정의 접미사 기능을 가진
- * @param {string} chatId - 발생\"톡-톡\"채팅 ID
- * @param {string} characterName - 탭된 캐릭터 이름
- */
 async function handleUserPat(chatId, characterName) {
     const chat = state.chats[chatId];
     if (!chat) return;
-
-    // 1. 화면 진동 애니메이션 트리거
     const phoneScreen = document.getElementById('phone-screen');
     phoneScreen.classList.remove('pat-animation');
     void phoneScreen.offsetWidth;
     phoneScreen.classList.add('pat-animation');
     setTimeout(() => phoneScreen.classList.remove('pat-animation'), 500);
-
-    // 2. 입력 상자를 팝업하여 사용자가 접미사를 입력하도록
     const suffix = await showCustomPrompt(
         `당신이 쓰다듬었습니다 \"${characterName}\"`, 
         "(선택 사항)접미사 입력",
@@ -8265,33 +8255,26 @@ async function handleUserPat(chatId, characterName) {
         "text"
     );
 
-    // 만약 사용자가 취소를 클릭했다면, 아무것도 하지 않음
     if (suffix === null) return;
-
-    // 3. 사용자에게 보이는 것 생성\"톡-톡\"메시지
     const myNickname = chat.isGroup ? (chat.settings.myNickname || '내') : '내';
-    // 【핵심 수정】접미사를 메시지 내용에 연결
     const visibleMessageContent = `${myNickname} 쓰다듬었습니다 \"${characterName}\" ${suffix.trim()}`;
     const visibleMessage = {
-        role: 'system', // 여전히 시스템 메시지입니다
+        role: 'system', 
         type: 'pat_message',
         content: visibleMessageContent,
         timestamp: Date.now()
     };
     chat.history.push(visibleMessage);
 
-    // 4. 사용자에게는 숨겨져 있지만, AI에게는 보이는 시스템 메시지 생성, AI의 응답을 트리거하기 위해
-    // 【핵심 수정】마찬가지로 접미사를 AI에게 제공하는 프롬프트에 추가
     const hiddenMessageContent = `[시스템 알림:사용자(${myNickname})방금 당신을 쓰다듬었습니다(${characterName})${suffix.trim()}.당신은 이에 대해 응답해 주세요.]`;
     const hiddenMessage = {
         role: 'system',
         content: hiddenMessageContent,
-        timestamp: Date.now() + 1, // 타임스탬프+1순서를 보장하기 위해
+        timestamp: Date.now() + 1, 
         isHidden: true
     };
     chat.history.push(hiddenMessage);
 
-    // 5. 변경 사항 저장 및 UI 업데이트
     await db.chats.put(chat);
     if (state.activeChatId === chatId) {
         appendMessage(visibleMessage, chat);
@@ -8299,54 +8282,39 @@ async function handleUserPat(chatId, characterName) {
     await renderChatList();
 }
 
-// ▼▼▼ 이것을 사용하십시오【로직 재구성 후】함수, 당신의 기존 renderMemoriesScreen 함수를 완전히 교체 ▼▼▼
-/**
- * 【재구성 버전】추억 및 약속 화면 렌더링, 단일 루프 및 명확한 if 사용/else로직
- */
 async function renderMemoriesScreen() {
     const listEl = document.getElementById('memories-list');
     listEl.innerHTML = '';
     
-    // 1. 모든 추억 가져오기, 및 목표 날짜에 따라 정렬(만약 약속이라면)또는 생성 날짜(만약 추억이라면)내림차순 정렬
     const allMemories = await db.memories.orderBy('timestamp').reverse().toArray();
     
     if (allMemories.length === 0) {
         listEl.innerHTML = '<p style="text-align:center; color: var(--text-secondary); padding: 50px 0;">여기에는 아직 공통된 추억과 약속이 없습니다~</p>';
         return;
     }
-
-    // 2. 미도래 약속을 가장 앞에 정렬
     allMemories.sort((a, b) => {
         const aIsActiveCountdown = a.type === 'countdown' && a.targetDate > Date.now();
         const bIsActiveCountdown = b.type === 'countdown' && b.targetDate > Date.now();
-        if (aIsActiveCountdown && !bIsActiveCountdown) return -1; // a앞에 정렬
-        if (!aIsActiveCountdown && bIsActiveCountdown) return 1;  // b앞에 정렬
-        if (aIsActiveCountdown && bIsActiveCountdown) return a.targetDate - b.targetDate; // 모두 카운트다운입니다, 날짜별 오름차순
-        return 0; // 다른 경우 원래 순서 유지
+        if (aIsActiveCountdown && !bIsActiveCountdown) return -1; 
+        if (!aIsActiveCountdown && bIsActiveCountdown) return 1;  
+        if (aIsActiveCountdown && bIsActiveCountdown) return a.targetDate - b.targetDate; 
+        return 0; 
     });
 
-    // 3. 【핵심】모든 유형의 카드를 처리하기 위해 단일 루프 사용
     allMemories.forEach(item => {
         let card;
-        // 판단1:만약 진행 중인 약속이라면
         if (item.type === 'countdown' && item.targetDate > Date.now()) {
             card = createCountdownCard(item);
         } 
-        // 판단2:그 외 모든 경우(일반 추억 또는 만료된 약속)
         else {
             card = createMemoryCard(item);
         }
         listEl.appendChild(card);
     });
     
-    // 4. 모든 카운트다운 시작
     startAllCountdownTimers();
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-/**
- * 일반 추억 카드 DOM 요소 생성
- */
 function createMemoryCard(memory) {
     const card = document.createElement('div');
     card.className = 'memory-card';
