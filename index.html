@@ -3534,24 +3534,19 @@ body {
         사용자 지정 버블 스타일 (CSS)
         <button id="reset-custom-css-btn" type="button" style="background: none; border: 1px solid #ccc; color: #555; font-size: 12px; padding: 2px 8px; border-radius: 5px; cursor: pointer; margin-left: 10px;">재설정</button>
     </label>
-    <textarea id="custom-css-input" rows="5" style="width: 100%; margin-top: 8px; font-family: monospace; font-size: 12px; resize: vertical;" placeholder="/* 예시:에\"내\"버블에 그라데이션 배경과 그림자 추가 */
+    <textarea id="custom-css-input" rows="5" style="width: 100%; margin-top: 8px; font-family: monospace; font-size: 12px; resize: vertical;" placeholder="
 .message-bubble.user .content {
   background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border-radius: 15px 4px 15px 15px;
 }"></textarea>
 </div>
-<!-- ▲▲▲ 새 코드 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 이 새 코드를 사용자 지정 CSS 입력 상자의 form에 붙여넣으세요-group 다음에 ▼▼▼ -->
 <div class="form-group">
     <label>실시간 미리보기</label>
     <div id="settings-preview-area">
-        <!-- JS여기에 미리보기 내용이 생성됩니다 -->
     </div>
 </div>
-<!-- ▲▲▲ 새 코드 붙여넣기 끝 ▲▲▲ -->
-
             <div class="form-group">
                 <label>채팅 배경</label>
                 <div class="bg-upload-container">
@@ -3621,7 +3616,6 @@ body {
     </div>
 </div>
 
-<!-- 아바타 프레임 선택 모달 창 (새로 추가된 것입니다) -->
     <div id="avatar-frame-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -3634,12 +3628,10 @@ body {
                 </div>
                 <div id="ai-frame-content" class="frame-content">
                     <div id="ai-frame-grid" class="frame-grid">
-                        <!-- AI아바타 프레임이 여기에 동적으로 생성됩니다 -->
                     </div>
                 </div>
                 <div id="my-frame-content" class="frame-content" style="display: none;">
                      <div id="my-frame-grid" class="frame-grid">
-                        <!-- 내 아바타 프레임이 여기에 동적으로 생성됩니다 -->
                     </div>
                 </div>
             </div>
@@ -3652,25 +3644,21 @@ body {
 
     <audio id="audio-player" style="display:none;"></audio>
 
-<!-- ▼▼▼ 아래 코드를 사용하여【전체】모달 창 코드로, 기존의 id를 대체하세요="create-post-modal" 의 전체 div ▼▼▼ -->
 <div id="create-post-modal" class="modal">
     <div class="modal-content" style="height: auto; max-height: 90%;">
         <div class="modal-header">
             <span>게시물 발행</span>
         </div>
         <div class="modal-body">
-            <!-- 공개 텍스트 입력 영역 -->
             <div class="form-group">
                 <textarea id="post-public-text" rows="3" placeholder="새로운 소식 공유...(필수가 아닌 공개 텍스트)"></textarea>
             </div>
-
-            <!-- === 모드 전환 스위치 (새로 추가) === -->
+    
             <div class="post-mode-switcher">
                 <button id="switch-to-image-mode" class="mode-btn active">이미지 업로드</button>
                 <button id="switch-to-text-image-mode" class="mode-btn">텍스트 이미지 사용</button>
             </div>
 
-<!-- ▼▼▼ 【수정 후】의 공개 범위 설정 ▼▼▼ -->
 <div class="form-group">
     <label>공개 범위</label>
     <div id="post-visibility-options" style="display: flex; gap: 15px; margin-bottom: 10px;">
@@ -3679,12 +3667,9 @@ body {
         <label><input type="radio" name="visibility" value="include"> 특정 그룹 공개</label>
     </div>
     <div id="post-visibility-groups" style="display: none; max-height: 120px; overflow-y: auto; background: #f9f9f9; padding: 10px; border-radius: 8px;">
-        <!-- 그룹 다중 선택 상자는 JS에 의해 동적으로 생성됩니다 -->
     </div>
 </div>
-<!-- ▲▲▲ 수정 끝 ▲▲▲ -->
 
-            <!-- === 이미지 모드 영역 === -->
             <div id="image-mode-content" class="post-mode-content active">
                 <div class="form-group">
 <div id="post-image-preview-container" class="post-image-preview-container">
@@ -3703,14 +3688,12 @@ body {
                 </div>
             </div>
 
-            <!-- === 텍스트 이미지 모드 영역 (새로 추가) === -->
             <div id="text-image-mode-content" class="post-mode-content">
                 <div class="form-group">
                     <label>텍스트 이미지 (AI가 이해하는 데 사용되는 설명, 이미지를 클릭하면 볼 수 있습니다.)</label>
                     <textarea id="post-hidden-text" rows="4" placeholder="여기에 이미지 설명을 작성하세요..."></textarea>
                 </div>
             </div>
-
         </div>
         <div class="modal-footer">
             <button class="cancel" id="cancel-create-post-btn">취소</button>
@@ -3718,9 +3701,7 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 대체 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 이 새로운 모달 HTML을 다른 모든 모달 뒤에 붙여넣으십시오 ▼▼▼ -->
 <div id="group-management-modal" class="modal">
     <div class="modal-content" style="height: 60%;">
         <div class="modal-header">
@@ -3736,7 +3717,6 @@ body {
             </div>
             <hr style="opacity: 0.2;">
             <div id="existing-groups-list" style="display: flex; flex-direction: column; gap: 10px;">
-                <!-- 그룹 목록은 JS에 의해 동적으로 생성됩니다 -->
             </div>
         </div>
         <div class="modal-footer">
@@ -3744,24 +3724,18 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 코드 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 이 새로운 HTML을 모든 모달 끝에 붙여넣으십시오 ▼▼▼ -->
 <div id="message-actions-modal" class="modal">
     <div id="custom-modal" style="width: 250px;">
         <div class="custom-modal-footer">
-            <!-- 새로운 작업 버튼 -->
             <button id="edit-message-btn">메시지 편집</button>
             <button id="copy-message-btn">텍스트 복사</button>
             <button id="select-message-btn">다중 선택 모드</button>
-            <!-- 취소 버튼 -->
             <button id="cancel-message-action-btn" style="margin-top: 8px; border-radius: 8px; background-color: #f0f0f0;">취소</button>
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 이 새로운 HTML을 모든 모달 끝에 붙여넣으십시오 ▼▼▼ -->
 <div id="post-actions-modal" class="modal">
     <div id="custom-modal" style="width: 250px;">
         <div class="custom-modal-footer">
@@ -3771,18 +3745,14 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 【새로운】시각적 메시지 편집기 모달 ▼▼▼ -->
 <div id="message-editor-modal" class="modal">
     <div class="modal-content" style="height: 75%;">
         <div class="modal-header">
             <span>메시지 편집 및 분할</span>
         </div>
         <div class="modal-body" id="message-editor-body">
-            <!-- 편집기 컨테이너, JS가 여기에 텍스트 상자를 동적으로 생성합니다 -->
             <div id="message-editor-container"></div>
-            <!-- 새 메시지 추가 버튼 -->
             <button id="add-message-editor-block-btn" class="form-button form-button-secondary" style="margin-top: 15px;">
                 [+] 다음 메시지 추가
             </button>
@@ -3793,9 +3763,7 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 【새로운】배달 요청 모달 ▼▼▼ -->
 <div id="waimai-request-modal" class="modal">
     <div class="modal-content" style="width: 290px;">
         <div class="modal-header">
@@ -3818,7 +3786,6 @@ body {
     </div>
 </div>
 
-<!-- ▼▼▼ 【새로운】새로운 약속 만들기/카운트다운 모달 ▼▼▼ -->
 <div id="create-countdown-modal" class="modal">
     <div class="modal-content" style="height: auto;">
         <div class="modal-header">
@@ -3840,22 +3807,18 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 【새로운】빨간 봉투 보내기 모달 ▼▼▼ -->
 <div id="red-packet-modal" class="modal">
     <div class="modal-content" style="width: 300px; height: auto;">
         <div class="modal-header">
             <span>빨간 봉투 보내기</span>
         </div>
         <div class="modal-body" style="padding: 0;">
-            <!-- 1. 탭 전환 -->
+
             <div class="frame-tabs">
                 <div id="rp-tab-group" class="frame-tab active">무작위 금액 빨간 봉투</div>
                 <div id="rp-tab-direct" class="frame-tab">전용 빨간 봉투</div>
             </div>
-
-            <!-- 2. 무작위 금액 빨간 봉투 내용 영역 -->
             <div id="rp-content-group" class="frame-content" style="padding: 20px 15px;">
                 <div class="form-group">
                     <label>총 금액 (원)</label>
@@ -3872,8 +3835,6 @@ body {
                 <p id="rp-group-total" style="text-align: center; font-size: 24px; font-weight: bold; margin: 10px 0;">¥ 0.00</p>
                 <button id="send-group-packet-btn" class="form-button">빨간 봉투에 돈 넣기</button>
             </div>
-
-            <!-- 3. 전용 빨간 봉투 내용 영역 -->
             <div id="rp-content-direct" class="frame-content" style="display: none; padding: 20px 15px;">
                 <div class="form-group">
                     <label>보내기</label>
@@ -3896,9 +3857,7 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 【새로운】빨간 봉투 상세 모달 ▼▼▼ -->
 <div id="red-packet-details-modal" class="modal">
     <div class="modal-content" style="width: 280px; height: auto; background-color: #f7f7f7;">
         <div class="modal-header" style="background-color: #F96259; color: white; border-bottom: none; padding-bottom: 5px;">
@@ -3915,7 +3874,6 @@ body {
             </div>
             <div id="rp-details-summary" style="font-size: 13px; color: #8a8a8a; border-top: 1px solid #e0e0e0; padding-top: 10px;"></div>
             <div id="rp-details-list" style="max-height: 150px; overflow-y: auto; margin-top: 10px;">
-                <!-- 수령 내역은 JS에 의해 여기에 동적으로 생성됩니다 -->
             </div>
         </div>
         <div class="modal-footer">
@@ -3923,8 +3881,7 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
-<!-- ▼▼▼ 【새로운】투표 만들기 모달 ▼▼▼ -->
+
 <div id="create-poll-modal" class="modal">
     <div class="modal-content" style="width: 300px; height: auto;">
         <div class="modal-header">
@@ -3938,7 +3895,6 @@ body {
             <div class="form-group">
                 <label>투표 옵션 (최소 2개)</label>
                 <div id="poll-options-container" style="display: flex; flex-direction: column; gap: 8px;">
-                    <!-- 투표 옵션은 JS에 의해 여기에 동적으로 생성됩니다 -->
                 </div>
                 <button id="add-poll-option-btn" class="form-button form-button-secondary" style="margin-top: 12px;">+ 옵션 추가</button>
             </div>
@@ -3949,9 +3905,7 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
 
-<!-- ▼▼▼ 【새로운】AI아바타 라이브러리 관리 모달 ▼▼▼ -->
 <div id="ai-avatar-library-modal" class="modal">
     <div class="modal-content" style="height: 70%;">
         <div class="modal-header">
@@ -3960,7 +3914,6 @@ body {
         </div>
         <div class="modal-body" style="padding: 15px;">
             <div id="ai-avatar-library-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px;">
-                <!-- 아바타 라이브러리 내용은 JS에 의해 동적으로 생성됩니다 -->
             </div>
         </div>
         <div class="modal-footer">
@@ -3969,9 +3922,6 @@ body {
     </div>
 </div>
 
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
-
-<!-- ▼▼▼ 【새로운】사용자 링크 공유 모달 ▼▼▼ -->
 <div id="share-link-modal" class="modal">
     <div class="modal-content" style="width: 300px; height: auto;">
         <div class="modal-header">
@@ -4001,18 +3951,10 @@ body {
         </div>
     </div>
 </div>
-<!-- ▲▲▲ 새 HTML 붙여넣기 끝 ▲▲▲ -->
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-        // ===================================================================
-        // 1. 모든 변수 및 상수 정의
-        // ===================================================================
         const db = new Dexie('GeminiChatDB');
-        // --- 수정 완료 ---
         let state = { chats: {}, activeChatId: null, globalSettings: {}, apiConfig: {}, userStickers: [], worldBooks: [], personaPresets: [], qzoneSettings: {}, activeAlbumId: null };
-        // --- 수정 끝 ---
         let musicState = { isActive: false, activeChatId: null, isPlaying: false, playlist: [], currentIndex: -1, playMode: 'order', totalElapsedTime: 0, timerId: null };
         const audioPlayer = document.getElementById('audio-player');
         let newWallpaperBase64 = null;
@@ -4023,19 +3965,18 @@ body {
         let editingWorldBookId = null;
         let editingPersonaPresetId = null;
 
-let waimaiTimers = {}; // 배달 카운트다운 저장용
+let waimaiTimers = {};
 
 let activeMessageTimestamp = null;
-let activePostId = null; // <-- 새로 추가:현재 작업 중인 게시물 ID 저장용
+let activePostId = null; 
 
         let photoViewerState = {
             isOpen: false,
-            photos: [], // 현재 앨범의 모든 사진 URL 저장
-            currentIndex: -1, // 현재 보고 있는 사진 인덱스
+            photos: [], 
+            currentIndex: -1, 
         };
 
         let unreadPostsCount = 0;
-
         let isFavoritesSelectionMode = false;
         let selectedFavorites = new Set()
 
@@ -4055,7 +3996,6 @@ const myFrameGrid = document.getElementById('my-frame-grid');
         const defaultGroupAvatar = 'https://i.postimg.cc/gc3QYCDy/1-NINE7-Five.jpg';
         let notificationTimeout;
 
-// ▼▼▼ JS 상단 변수 정의 영역에 이 새 상수 추가 ▼▼▼
 const DEFAULT_APP_ICONS = {
     'world-book': 'https://i.postimg.cc/mZ0vV6tT/IMG-6907.jpg',
     'qq': 'https://i.postimg.cc/gJ7Dz5fj/IMG-6906.jpg',
@@ -4063,7 +4003,6 @@ const DEFAULT_APP_ICONS = {
     'wallpaper': 'https://i.postimg.cc/WbgQy6kg/IMG-6909.jpg',
     'font': 'https://files.catbox.moe/j1kn1a.jpeg'
 };
-// ▲▲▲ 추가 종료 ▲▲▲
 
         const avatarFrames = [ { id: 'none', url: '', name: '없음' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/fLDnz5Pn/IMG-5574.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/HxH3cNHz/IMG-6871.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/jCVK0fGL/IMG-6890.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/85Zsyjwn/IMG-6895.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/cJtpZCB3/IMG-6894.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/63sDQKMm/IMG-6893.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/cHQPgzj4/IMG-6888.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/dVLXm3Xf/IMG-6885.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/kGsZwbq0/IMG-6886.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/63NmX03s/IMG-4366.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/zvz2LGK0/IMG-4367.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/prsGKMBx/IMG-4370.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/gk0BmrY0/IMG-4371.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/fRt2SFSn/IMG-4368.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/kGgwJhPH/IMG-4374.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/PrcKH436/IMG-4376.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/fRV86FMq/IMG-4381.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/HsyqMVyk/IMG-4385.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/qBbKK7dS/IMG-4386.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/05wnd389/IMG-4388.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/RZNLhbbr/IMG-4389.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/fLTc42dg/IMG-4391.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/FzbGNdRT/IMG-4392.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/XY63sTS3/IMG-4393.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/Cx9vCVWH/IMG-4395.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/kMfPQBwQ/IMG-4396.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/CLrZQMMD/IMG-4398.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/L4zwDhTC/IMG-4399.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/yN3s8szM/IMG-4400.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/59Cn1tkB/IMG-4401.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/g0s1V0PX/IMG-4402.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/Jn1DFPgY/IMG-4403.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/q7cQnDy1/IMG-4404.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/RFK3q2t0/IMG-4407.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/gcV0VR2t/IMG-4408.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/W1CjLb4J/IMG-4409.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/Ss7pM6fW/IMG-4410.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/nrFfYX3N/IMG-4412.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/cHWp0KG6/IMG-4413.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/4yNjHrdg/IMG-4414.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/hPX5F8Qp/IMG-4415.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/vHCSG1WM/IMG-4416.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/x1Hp80Rm/IMG-4417.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/FHRcCGfH/IMG-4418.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/13hhJ77p/IMG-4419.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/J4WCQd2j/IMG-4420.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/Dydkpd9H/IMG-4421.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/mrkvDxPW/IMG-4422.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/76Tj3g1B/IMG-4425.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/3N5Vndn3/IMG-4426.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/05DLr0yj/IMG-4427.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/GhR6DT4Q/IMG-4428.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/fRTF24jS/IMG-4430.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/R0WYmcYM/IMG-4431.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/nrJSqNhz/IMG-4432.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/tC9mJ0cv/IMG-4438.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/XNkQTHvf/IMG-5561.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/Mpv5fzm5/IMG-4439.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/T1tjhsyB/IMG-4720.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/c4JMPd2W/IMG-4724.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/g2XykNGB/IMG-4727.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/y8MmJcd6/IMG-4728.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/Lsjzj5Yt/IMG-4729.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/bNdk33SN/IMG-4893.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/4x9tTy1D/IMG-5563.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/DZshzKv6/IMG-5576.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/Fsvr71JL/IMG-5573.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/Fz3HwLk9/IMG-5569.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/wjH180kn/IMG-5566.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/MG6qtLYK/IMG-5565.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/CKgDNYVb/IMG-5577.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/hj4dkrvj/IMG-5578.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/hj4dkrvj/IMG-5578.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/C5XnfpNB/IMG-5579.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/4y7mGFgJ/IMG-5716.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/FzM1Hgr0/IMG-5717.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/rF4KYbjj/IMG-5720.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/6pLTBvDG/IMG-5721.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/VNK6Ccsf/IMG-5722.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/wx72fhr2/IMG-5968.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/QdrqdvdY/IMG-5969.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/0yd0MZ6k/IMG-5971.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/1zmcp66p/IMG-5973.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/wBw5Fvcn/IMG-5974.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/R0pfKYvB/IMG-5976.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/9fQZ425b/IMG-5975.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/v8V9xXjJ/IMG-6137.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/WbmkXzsS/IMG-6138.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/Dw2bDhZh/IMG-6140.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/ZqQBCyLY/IMG-6144.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/qRCtnMms/IMG-6145.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/1Rwn3XVP/IMG-6146.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/Kv51tW5H/IMG-6147.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/nhcC21Rc/IMG-6148.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/fTWzQRx8/IMG-6149.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/LXyyqDbY/IMG-6294.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/7Zgm1wRy/IMG-6295.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/5tbpnDcQ/IMG-6296.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/YSRRV8kn/IMG-6297.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/k45sd8gn/IMG-6375.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/50k390X8/IMG-6376.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/90RBDh9K/IMG-6377.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/cCpBYbMH/IMG-6552.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/Pf9g2fSL/IMG-6554.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/gkhf597g/IMG-6555.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/g2PfbSFm/IMG-6556.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/pLY3WfR8/IMG-6557.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/65Cmcr7S/IMG-6559.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/Y94XWYKd/IMG-6560.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/ydwLXx7s/IMG-6562.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/G3y73Fj2/IMG-6563.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/TYvkKKkc/IMG-6565.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/GmcqjZn8/IMG-6566.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/k5Gs0K47/IMG-6567.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/XJy8JWdh/IMG-6568.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/fycfcvHf/IMG-6569.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/J7ZxC11H/IMG-6570.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/hPnrSHjy/IMG-4434.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/YqxxjbLp/IMG-6572.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/wjfcQMkZ/IMG-6573.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/Vv8jkCYr/IMG-6574.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/MZ77rdDy/IMG-6850.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/T3NvqJCZ/IMG-6851.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/28TsrxRV/IMG-6852.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/VkV2bLNw/IMG-6853.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/gJ95NSRB/IMG-6854.gif', name: '14' }, { id: 'frame_cat_ear', url: 'https://i.postimg.cc/d1qsQsbQ/IMG-6855.gif', name: '1' }, { id: 'frame_ribbon', url: 'https://i.postimg.cc/gJNYx9pV/IMG-6856.gif', name: '2' }, { id: 'frame_flower', url: 'https://i.postimg.cc/fyPDvxJk/IMG-6860.gif', name: '3' }, { id: 'frame_tech', url: 'https://i.postimg.cc/QMDsSNxg/IMG-6861.gif', name: '4' }, { id: 'frame_5', url: 'https://i.postimg.cc/vBqsQW7X/IMG-6858.gif', name: '5' }, { id: 'frame_6', url: 'https://i.postimg.cc/Y0vwjhb7/IMG-6857.gif', name: '6' }, { id: 'frame_7', url: 'https://i.postimg.cc/90sH9Cn7/IMG-6868.gif', name: '7' }, { id: 'frame_8', url: 'https://i.postimg.cc/Y2PHZzCC/IMG-6866.gif', name: '8' }, { id: 'frame_9', url: 'https://i.postimg.cc/7Z8yYP7v/IMG-6889.gif', name: '9' }, { id: 'frame_10', url: 'https://i.postimg.cc/nryNzTXK/IMG-6915.gif', name: '10' }, { id: 'frame_11', url: 'https://i.postimg.cc/Qx5dqyJ3/IMG-6917.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/Wbr0JSDD/IMG-5316.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/tgR6wjBP/IMG-5570.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/d0WCKxff/IMG-6932.gif', name: '14' }, { id: 'frame_11', url: 'https://i.postimg.cc/Ss3znzk7/IMG-6934.gif', name: '11' }, { id: 'frame_12', url: 'https://i.postimg.cc/nrm9BcL8/IMG-6941.gif', name: '12' }, { id: 'frame_13', url: 'https://i.postimg.cc/ZYvd1jxf/IMG-6937.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/sDFhySn3/IMG-6936.gif', name: '14' }, { id: 'frame_13', url: 'https://i.postimg.cc/43PhvxRq/IMG-6922.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/3Rb46fRZ/IMG-6923.gif', name: '14' }, { id: 'frame_13', url: 'https://i.postimg.cc/PJppkbvn/IMG-6918.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/XqRZNZ9G/IMG-6916.gif', name: '14' }, { id: 'frame_14', url: 'https://i.postimg.cc/RVt6sRzc/IMG-6939.gif', name: '14' }, { id: 'frame_13', url: 'https://i.postimg.cc/mgGc0HbK/IMG-6926.gif', name: '13' }, { id: 'frame_14', url: 'https://i.postimg.cc/P5zLh5JJ/IMG-6942.gif', name: '14' }, { id: 'frame_14', url: 'https://i.postimg.cc/xCqqKGRN/IMG-6929.gif', name: '14' },
       { id: 'frame_12', url: 'https://i.postimg.cc/7LSRp4hx/e7fa949b9pc84cff0dabe57defceb54c.gif', name: '12' },
@@ -4225,7 +4164,6 @@ const DEFAULT_APP_ICONS = {
             });
         }
 
-// ▼▼▼ 이것을 사용하십시오【기능 강화 버전】이전 showCustomPrompt 함수를 대체하십시오 ▼▼▼
 function showCustomPrompt(title, placeholder, initialValue = '', type = 'text', extraHtml = '') {
     return new Promise(resolve => {
         modalResolve = resolve;
@@ -4236,18 +4174,14 @@ function showCustomPrompt(title, placeholder, initialValue = '', type = 'text', 
             ? `<textarea id="${inputId}" placeholder="${placeholder}" rows="4" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; box-sizing: border-box; resize: vertical;">${initialValue}</textarea>`
             : `<input type="${type}" id="${inputId}" placeholder="${placeholder}" value="${initialValue}">`;
         
-        // 【핵심 수정】추가 HTML과 입력란을 함께 조합합니다
         modalBody.innerHTML = extraHtml + inputHtml;
         const input = document.getElementById(inputId);
-
-        // 【핵심 수정】서식 도우미 버튼에 이벤트 바인딩
         modalBody.querySelectorAll('.format-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const templateStr = btn.dataset.template;
                 if (templateStr) {
                     try {
                         const templateObj = JSON.parse(templateStr);
-                        // null, 2 파라미터를 사용하여 JSON 문자열을 들여쓰기하여 서식 지정하고 더 읽기 쉽게 만듭니다
                         input.value = JSON.stringify(templateObj, null, 2);
                         input.focus();
                     } catch(e) {
@@ -4263,11 +4197,6 @@ function showCustomPrompt(title, placeholder, initialValue = '', type = 'text', 
         setTimeout(() => input.focus(), 100);
     });
 }
-// ▲▲▲ 대체 끝 ▲▲▲
-
-        // ===================================================================
-        // 2. 데이터베이스 구조 정의
-        // ===================================================================
 
 db.version(20).stores({ 
     chats: '&id, isGroup, groupId', 
@@ -4283,12 +4212,8 @@ db.version(20).stores({
     qzonePhotos: '++id, albumId',
     favorites: '++id, type, timestamp, originalTimestamp',
     qzoneGroups: '++id, name',
-    memories: '++id, chatId, timestamp, type, targetDate' // <--【핵심】targetDate 인덱스 추가
+    memories: '++id, chatId, timestamp, type, targetDate' 
 });
-
-        // ===================================================================
-        // 3. 모든 기능 함수 정의
-        // ===================================================================
 
         function showScreen(screenId) {
             if (screenId === 'chat-list-screen') {
@@ -4315,28 +4240,23 @@ db.version(20).stores({
                 'messages-view': document.getElementById('messages-view'),
                 'qzone-screen': document.getElementById('qzone-screen'),
                 'favorites-view': document.getElementById('favorites-view'),
-        'memories-view': document.getElementById('memories-view') // <-- 이 줄 추가
+        'memories-view': document.getElementById('memories-view') 
     };
             const mainHeader = document.getElementById('main-chat-list-header');
-            const mainBottomNav = document.getElementById('chat-list-bottom-nav'); // 메인 내비게이션 바 가져오기
+            const mainBottomNav = document.getElementById('chat-list-bottom-nav'); 
 
             if (isFavoritesSelectionMode) {
                 document.getElementById('favorites-edit-btn').click(); 
             }
-
-            // 모든 뷰 숨기기
             Object.values(views).forEach(v => v.classList.remove('active'));
-            // 대상 뷰 표시
             if (views[viewId]) {
                 views[viewId].classList.add('active');
             }
 
-            // 하단 내비게이션 바 하이라이트 업데이트
             document.querySelectorAll('#chat-list-bottom-nav .nav-item').forEach(item => {
                 item.classList.toggle('active', item.dataset.view === viewId);
             });
             
-            // ▼▼▼ 【핵심 수정】여기에서 모든 UI 요소의 표시 여부를 일괄적으로 관리합니다 ▼▼▼
             if (viewId === 'messages-view') {
                 mainHeader.style.display = 'flex';
                 mainBottomNav.style.display = 'flex';
@@ -4344,14 +4264,11 @@ db.version(20).stores({
                 mainHeader.style.display = 'none';
                 mainBottomNav.style.display = 'none';
             }
-            // ▲▲▲ 수정 끝 ▲▲▲
 
     if (viewId !== 'memories-view') {
         activeCountdownTimers.forEach(timerId => clearInterval(timerId));
         activeCountdownTimers = [];
     }
-
-            // 뷰 ID에 따라 특정 렌더링을 실행합니다/업데이트 로직
             switch (viewId) {
                 case 'qzone-screen':
                     views['qzone-screen'].style.backgroundColor = '#f0f2f5';
@@ -4364,7 +4281,6 @@ db.version(20).stores({
                     renderFavoritesScreen();
                     break;
                 case 'messages-view':
-                    // 필요한 경우, 여기에서 메시지 목록으로 돌아갈 때 실행할 로직을 추가할 수 있습니다
                     break;
             }
         }
@@ -4413,10 +4329,9 @@ db.version(20).stores({
 
             const [posts, favorites] = await Promise.all([
                 db.qzonePosts.orderBy('timestamp').reverse().toArray(),
-                db.favorites.where('type').equals('qzone_post').toArray() // 모든 즐겨찾는 게시물 가져오기
+                db.favorites.where('type').equals('qzone_post').toArray() 
             ]);
 
-            // 빠른 검색을 위해 즐겨찾는 게시물 ID 집합을 만듭니다
             const favoritedPostIds = new Set(favorites.map(fav => fav.content.id));
             
             postsListEl.innerHTML = '';
@@ -4477,18 +4392,13 @@ db.version(20).stores({
                     commentsHtml += '</div>';
                 }
 
-                // 좋아요 및 즐겨찾기 상태 확인
                 const userNickname = state.qzoneSettings.nickname;
                 const isLikedByUser = post.likes && post.likes.includes(userNickname);
-                const isFavoritedByUser = favoritedPostIds.has(post.id); // Set을 사용하여 빠르게 검색
-
+                const isFavoritedByUser = favoritedPostIds.has(post.id); 
                 postEl.innerHTML = `
                     <div class="post-header"><img src="${authorAvatar}" class="post-avatar"><div class="post-info"><span class="post-nickname">${authorNickname}</span><span class="post-timestamp">${formatPostTimestamp(post.timestamp)}</span></div>
-
-        <!-- 【새로 추가】게시물 작업 버튼 -->
         <div class="post-actions-btn">...</div>
     </div>
-
                     <div class="post-main-content">${contentHtml}</div>
                     <div class="post-feedback-icons">
                         <span class="action-icon like ${isLikedByUser ? 'active' : ''}"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
@@ -4552,8 +4462,6 @@ db.version(20).stores({
                 commentInput.addEventListener('blur', () => { setTimeout(() => { popup.style.display = 'none'; }, 200); });
             });
         }
-             
-// ▼▼▼ 아래의 것으로 사용하십시오【업데이트된】함수로, 코드의 이전 displayFilteredFavorites 함수를 완전히 대체하십시오 ▼▼▼
 
 function displayFilteredFavorites(items) {
     const listEl = document.getElementById('favorites-list');
@@ -4597,13 +4505,8 @@ function displayFilteredFavorites(items) {
                 contentHtml = publicTextHtml ? `${publicTextHtml}<div style="margin-top:10px;"><img src="https://i.postimg.cc/KYr2qRCK/1.jpg" class="chat-image" style="cursor: pointer;" data-hidden-text="${post.hiddenContent}"></div>` : `<img src="https://i.postimg.cc/KYr2qRCK/1.jpg" class="chat-image" style="cursor: pointer;" data-hidden-text="${post.hiddenContent}">`;
             }
 
-            // ▼▼▼ 새로 추가/수정 코드 시작 ▼▼▼
-            
-            // 1. 좋아요 영역의 HTML 구성
             let likesHtml = '';
-            // post 객체에 likes 배열이 존재하고 비어 있지 않은지 확인
             if (post.likes && post.likes.length > 0) {
-                // 존재하면, 좋아요 영역의 div를 생성
                 likesHtml = `
                     <div class="post-likes-section">
                         <svg class="like-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
@@ -4611,11 +4514,8 @@ function displayFilteredFavorites(items) {
                     </div>`;
             }
 
-            // 2. 댓글 영역의 HTML 구성
             let commentsHtml = '';
-            // post 객체에 comments 배열이 존재하고 비어 있지 않은지 확인
             if (post.comments && post.comments.length > 0) {
-                // 존재하면, 댓글 컨테이너를 생성하고 각 댓글을 순회합니다
                 commentsHtml = '<div class="post-comments-container">';
                 post.comments.forEach(comment => {
                     commentsHtml += `
@@ -4627,10 +4527,7 @@ function displayFilteredFavorites(items) {
                 commentsHtml += '</div>';
             }
 
-            // 3. 좋아요 및 댓글 HTML을 footerHtml에 조합합니다
             footerHtml = `${likesHtml}${commentsHtml}`;
-            
-            // ▲▲▲ 새로 추가/수정 코드 끝 ▲▲▲
 
         } else if (item.type === 'chat_message') {
             const msg = item.content;
@@ -4666,36 +4563,23 @@ function displayFilteredFavorites(items) {
             }
         }
         
-        // ▼▼▼ 최종 HTML 연결을 수정하고 footerHtml을 추가합니다 ▼▼▼
         card.innerHTML = `
             <div class="fav-card-header">${headerHtml}<div class="source">${sourceText}</div></div>
             <div class="fav-card-content">${contentHtml}</div>
-            ${footerHtml}`; // <-- 새로 생성한 footerHtml을 여기에 배치합니다
-            
+            ${footerHtml}`; 
         listEl.appendChild(card);
     }
 }
 
-// ▲▲▲ 대체 영역 끝 ▲▲▲
-
-        /**
-         * 【리팩토링된 함수】: 데이터 준비 및 렌더링 트리거 담당
-         */
         async function renderFavoritesScreen() {
-            // 1. 데이터베이스에서 최신 데이터를 가져와 캐시합니다
             allFavoriteItems = await db.favorites.orderBy('timestamp').reverse().toArray();
             
-            // 2. 검색 상자를 비우고 지우기 버튼을 숨깁니다
             const searchInput = document.getElementById('favorites-search-input');
             const clearBtn = document.getElementById('favorites-search-clear-btn');
             searchInput.value = '';
             clearBtn.style.display = 'none';
-
-            // 3. 모든 즐겨찾기 항목 표시
             displayFilteredFavorites(allFavoriteItems);
         }
-
-        // ▲▲▲ 붙여넣기 종료 ▲▲▲
 
         function resetCreatePostModal() {
             document.getElementById('post-public-text').value = '';
@@ -4708,7 +4592,6 @@ function displayFilteredFavorites(items) {
             document.getElementById('switch-to-image-mode').click();
         }
 
-// ▼▼▼ 이것을 사용하십시오【memories 포함됨】버전으로, 이전 exportBackup 함수를 완전히 대체하십시오 ▼▼▼
 async function exportBackup() {
     try {
         const backupData = {
@@ -4720,7 +4603,7 @@ async function exportBackup() {
             chats, worldBooks, userStickers, apiConfig, globalSettings,
             personaPresets, musicLibrary, qzoneSettings, qzonePosts,
             qzoneAlbums, qzonePhotos, favorites, qzoneGroups,
-            memories // 【핵심 수정】새로 추가
+            memories 
         ] = await Promise.all([
             db.chats.toArray(),
             db.worldBooks.toArray(),
@@ -4735,14 +4618,14 @@ async function exportBackup() {
             db.qzonePhotos.toArray(),
             db.favorites.toArray(),
             db.qzoneGroups.toArray(),
-            db.memories.toArray() // 【핵심 수정】새로 추가
+            db.memories.toArray() 
         ]);
 
         Object.assign(backupData, {
             chats, worldBooks, userStickers, apiConfig, globalSettings,
             personaPresets, musicLibrary, qzoneSettings, qzonePosts,
             qzoneAlbums, qzonePhotos, favorites, qzoneGroups,
-            memories // 【핵심 수정】새로 추가
+            memories 
         });
         
         const blob = new Blob(
@@ -4765,7 +4648,6 @@ async function exportBackup() {
     }
 }
 
-// ▼▼▼ 이것을 사용하십시오【memories 포함됨】버전으로, 이전 importBackup 함수를 완전히 대체하십시오 ▼▼▼
 async function importBackup(file) {
     if (!file) return;
 
@@ -4795,8 +4677,7 @@ async function importBackup(file) {
             if (Array.isArray(data.qzonePhotos)) await db.qzonePhotos.bulkPut(data.qzonePhotos);
             if (Array.isArray(data.favorites)) await db.favorites.bulkPut(data.favorites);
             if (Array.isArray(data.qzoneGroups)) await db.qzoneGroups.bulkPut(data.qzoneGroups);
-            if (Array.isArray(data.memories)) await db.memories.bulkPut(data.memories); // 【핵심 수정】새로 추가
-
+            if (Array.isArray(data.memories)) await db.memories.bulkPut(data.memories); 
             if (data.apiConfig) await db.apiConfig.put(data.apiConfig);
             if (data.globalSettings) await db.globalSettings.put(data.globalSettings);
             if (data.musicLibrary) await db.musicLibrary.put(data.musicLibrary);
@@ -4853,7 +4734,6 @@ async function importBackup(file) {
         }
 
 async function loadAllDataFromDB() {
-    // ▼▼▼ 【핵심 수정은 여기에 있습니다】 ▼▼▼
     const [
         chatsArr,
         apiConfig,
@@ -4863,7 +4743,7 @@ async function loadAllDataFromDB() {
         musicLib,
         personaPresets,
         qzoneSettings,
-        initialFavorites // initialFavorites를 구조 분해 할당에 추가
+        initialFavorites 
     ] = await Promise.all([
         db.chats.toArray(),
         db.apiConfig.get('main'),
@@ -4873,16 +4753,12 @@ async function loadAllDataFromDB() {
         db.musicLibrary.get('main'),
         db.personaPresets.toArray(),
         db.qzoneSettings.get('main'),
-        db.favorites.orderBy('timestamp').reverse().toArray() // 이 줄이 Promise.all의 배열 매개변수 내에 있는지 확인
+        db.favorites.orderBy('timestamp').reverse().toArray() 
     ]);
-    // ▲▲▲ 【수정 끝】 ▲▲▲
 
     state.chats = chatsArr.reduce((acc, chat) => {
 
-        // --- ▼▼▼ 핵심 수정은 바로 여기에 있습니다 ▼▼▼ ---
-        // 확인 1:만약 1:1 채팅이고 status 속성이 없다면
         if (!chat.isGroup && !chat.status) {
-            // 기본 status 객체를 보충합니다
             chat.status = {
                 text: '온라인',
                 lastUpdate: Date.now(),
@@ -4890,12 +4766,8 @@ async function loadAllDataFromDB() {
             };
             console.log(`이전 캐릭터에 "${chat.name}" status 속성이 보충되었습니다.`);
         }
-        // --- ▲▲▲ 수정 완료 ▲▲▲
 
-        // --- ▼▼▼ 핵심 수정은 바로 여기에 있습니다 ▼▼▼ ---
-        // 확인 2:최신 버전에 호환\"관계\"기능
         if (!chat.isGroup && !chat.relationship) {
-            // 만약 1:1 채팅이고 relationship 객체가 없다면, 기본값을 보충합니다
             chat.relationship = {
                 status: 'friend',
                 blockedTimestamp: null,
@@ -4903,15 +4775,12 @@ async function loadAllDataFromDB() {
             };
             console.log(`이전 캐릭터에 "${chat.name}" relationship 속성이 보충되었습니다.`);
         }
-        // --- ▲▲▲ 수정 완료 ▲▲▲
 
-    // ▼▼▼ 여기에 추가 ▼▼▼
     if (!chat.isGroup && (!chat.settings || !chat.settings.aiAvatarLibrary)) {
-        if (!chat.settings) chat.settings = {}; // 만약 settings조차 없는 경우를 대비하여
+        if (!chat.settings) chat.settings = {};
         chat.settings.aiAvatarLibrary = [];
         console.log(`이전 캐릭터에 "${chat.name}" aiAvatarLibrary 속성이 보충되었습니다.`);
     }
-    // ▲▲▲ 추가 종료 ▲▲▲
 
         if (!chat.musicData) chat.musicData = { totalTime: 0 };
         if (chat.settings && chat.settings.linkedWorldBookId && !chat.settings.linkedWorldBookIds) {
@@ -4922,7 +4791,6 @@ async function loadAllDataFromDB() {
         return acc;
     }, {});
     state.apiConfig = apiConfig || { id: 'main', proxyUrl: '', apiKey: '', model: '' };
-
 state.globalSettings = globalSettings || { 
     id: 'main', 
     wallpaper: 'linear-gradient(135deg, #89f7fe, #66a6ff)', 
@@ -4930,9 +4798,9 @@ state.globalSettings = globalSettings || {
     enableBackgroundActivity: false, 
     backgroundActivityInterval: 60,
     blockCooldownHours: 1,
-    appIcons: { ...DEFAULT_APP_ICONS } // 【핵심 수정】appIcons가 존재하고 기본값이 있는지 확인
+    appIcons: { ...DEFAULT_APP_ICONS } 
 };
-// 【핵심 수정】저장된 아이콘과 기본 아이콘을 병합하여 업데이트 후 이전 데이터가 새 아이콘을 잃는 것을 방지합니다
+
 state.globalSettings.appIcons = { ...DEFAULT_APP_ICONS, ...(state.globalSettings.appIcons || {}) };
 
     state.userStickers = userStickers || [];
@@ -4941,9 +4809,8 @@ state.globalSettings.appIcons = { ...DEFAULT_APP_ICONS, ...(state.globalSettings
     state.personaPresets = personaPresets || [];
     state.qzoneSettings = qzoneSettings || { id: 'main', nickname: '{{user}}', avatar: 'https://files.catbox.moe/q6z5fc.jpeg', banner: 'https://files.catbox.moe/r5heyt.gif' };
 
-    // ▼▼▼ 【이 줄이 Promise.all 이후에 있으며, 구조 분해 할당으로 얻은 initialFavorites를 사용하는지 확인】 ▼▼▼
     allFavoriteItems = initialFavorites || [];
-    // ▲▲▲ 【수정 끝】 ▲▲▲
+
 }
 
         async function saveGlobalPlaylist() { await db.musicLibrary.put({ id: 'main', playlist: musicState.playlist }); }
@@ -4954,40 +4821,31 @@ state.globalSettings.appIcons = { ...DEFAULT_APP_ICONS, ...(state.globalSettings
 
         function updateClock() { const now = new Date(); const timeString = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }); const dateString = now.toLocaleDateString('zh-CN', { weekday: 'long', month: 'long', day: 'numeric' }); document.getElementById('main-time').textContent = timeString; document.getElementById('status-bar-time').textContent = timeString; document.getElementById('main-date').textContent = dateString; }
 
-// ▼▼▼ 이것을 사용하십시오【궁극적 강화 버전】함수로, 코드의 이전 parseAiResponse 함수를 완전히 대체하십시오 ▼▼▼
 function parseAiResponse(content) {
     const trimmedContent = content.trim();
 
-    // 1. 【새로운】우선적으로 처리 "[...][...]" 이러한 붙어있는 JSON 배열 형식
     if (trimmedContent.startsWith('[') && trimmedContent.endsWith(']')) {
-        // 정규식을 사용하여 모든 개별 "[...]" 블록
         const matches = trimmedContent.match(/\[(.*?)\]/g);
         
-        // 여러 블록이 일치하면, 붙어있는 형식입니다
         if (matches && matches.length > 1) {
             try {
                 let combinedResults = [];
                 for (const match of matches) {
-                    // 각각을 개별적으로 구문 분석 " [...] " 문자열 블록
                     const parsedArray = JSON.parse(match);
                     if (Array.isArray(parsedArray)) {
-                        // 구문 분석된 배열 내용을 전체 결과에 병합
                         combinedResults = combinedResults.concat(parsedArray);
                     }
                 }
-                // 내용 병합에 성공하면 최종 결과 반환
                 if (combinedResults.length > 0) {
                     console.log("붙어있는 형식의 JSON 구문 분석 성공:", combinedResults);
                     return combinedResults;
                 }
             } catch (e) {
-                // 구문 분석 중 오류가 발생하면 이 방법을 포기하고 코드가 아래의 이전 방법을 계속 시도하도록 합니다
                 console.warn("붙어있는 JSON 구문 분석 시도 실패, 표준 구문 분석 흐름으로 되돌립니다.", e);
             }
         }
     }
 
-    // 2. 표준적이고 단일한 JSON 배열로 구문 분석 시도
     if (trimmedContent.startsWith('[') && trimmedContent.endsWith(']')) {
         try {
             const parsed = JSON.parse(trimmedContent);
@@ -4995,22 +4853,17 @@ function parseAiResponse(content) {
                 return parsed;
             }
         } catch (e) {
-            // 구문 분석 실패, 다른 방법 계속 시도
         }
     }
 
-    // 3. 단일 JSON 객체로 구문 분석 시도 (AI가 객체 하나만 반환하는 경우 처리)
     if (trimmedContent.startsWith('{') && trimmedContent.endsWith('}')) {
         try {
             const parsed = JSON.parse(trimmedContent);
-            // 객체로 성공적으로 구문 분석한 후, 배열에 넣어 형식을 통일합니다
             return [parsed]; 
         } catch (e) {
-            // 해석 실패, 계속
         }
     }
     
-    // 4. 최후의 대체 방안으로, 텍스트에서 JSON 배열을 추출 시도
     try {
         const match = content.match(/\[(.*?)\]/s);
         if (match && match[0]) {
@@ -5018,38 +4871,29 @@ function parseAiResponse(content) {
             if (Array.isArray(parsed)) return parsed;
         }
     } catch (e) {
-        // 추출 실패
     }
 
-    // 5. 만약 위 모든 것이 실패하면, 일반 텍스트로 처리
     const lines = content.split('\n').map(l => l.trim()).filter(l => l.length > 0 && !l.startsWith('```'));
     if (lines.length > 0) {
-         // 일반 텍스트를 표준 메시지 객체로 래핑
         return lines.map(line => ({ type: 'text', content: line }));
     }
     
-    // 6. 최종적으로, 원본 텍스트를 포함하는 단일 메시지 객체 반환
     return [{ type: 'text', content: content }];
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
         function renderApiSettings() { document.getElementById('proxy-url').value = state.apiConfig.proxyUrl || ''; document.getElementById('api-key').value = state.apiConfig.apiKey || ''; 
-    // ▼▼▼ 이 줄 추가 ▼▼▼
     document.getElementById('background-activity-switch').checked = state.globalSettings.enableBackgroundActivity || false;
     document.getElementById('background-interval-input').value = state.globalSettings.backgroundActivityInterval || 60;
     document.getElementById('block-cooldown-input').value = state.globalSettings.blockCooldownHours || 1;
 }
         window.renderApiSettingsProxy = renderApiSettings;
 
-// ▼▼▼ 이것을 사용하십시오【새로운 버전】의 함수, 기존 renderChatList를 완전히 대체합니다 ▼▼▼
 async function renderChatList() {
     const chatListEl = document.getElementById('chat-list');
     chatListEl.innerHTML = '';
 
-    // 1. 이전처럼, 모든 채팅을 가져와 최신 메시지 시간순으로 정렬
     const allChats = Object.values(state.chats).sort((a, b) => (b.history.slice(-1)[0]?.timestamp || 0) - (a.history.slice(-1)[0]?.timestamp || 0));
     
-    // 2. 모든 그룹 가져오기
     const allGroups = await db.qzoneGroups.toArray();
 
     if (allChats.length === 0) {
@@ -5057,26 +4901,17 @@ async function renderChatList() {
         return;
     }
 
-    // --- 【핵심 수정 시작】---
-
-    // 3. 각 그룹의 내부 최신 메시지 타임스탬프 찾기
     allGroups.forEach(group => {
-        // 정렬된 allChats에서 이 그룹의 첫 번째 항목 찾기(즉, 최신 메시지)채팅
+
         const latestChatInGroup = allChats.find(chat => chat.groupId === group.id);
-        // 찾았다면, 해당 타임스탬프 사용;만약 해당 그룹에 현재 채팅이 없거나 채팅 기록이 없다면, 0 사용
+
         group.latestTimestamp = latestChatInGroup ? (latestChatInGroup.history.slice(-1)[0]?.timestamp || 0) : 0;
     });
 
-    // 4. 이 최신 타임스탬프에 따라\"그룹 자체를\"정렬합니다
     allGroups.sort((a, b) => b.latestTimestamp - a.latestTimestamp);
 
-    // --- 【핵심 수정 종료】---
-
-    // 5. 이제, 정렬된 그룹 순서대로 렌더링합니다
     allGroups.forEach(group => {
-        // 전체 목록에서 이(정렬된)그룹에 속한 친구를 필터링합니다
         const groupChats = allChats.filter(chat => !chat.isGroup && chat.groupId === group.id);
-        // 만약 이 그룹이 비어 있다면(모든 친구가 삭제되었을 수 있습니다),건너뜁니다
         if (groupChats.length === 0) return;
 
         const groupContainer = document.createElement('div');
@@ -5089,7 +4924,6 @@ async function renderChatList() {
             <div class="chat-group-content"></div>
         `;
         const contentEl = groupContainer.querySelector('.chat-group-content');
-        // allChats 자체가 정렬되어 있으므로, groupChats도 당연히 정렬됩니다
         groupChats.forEach(chat => {
             const item = createChatListItem(chat);
             contentEl.appendChild(item);
@@ -5097,15 +4931,12 @@ async function renderChatList() {
         chatListEl.appendChild(groupContainer);
     });
 
-    // 6. 마지막으로, 모든 그룹 채팅과 그룹화되지 않은 친구를 렌더링합니다
-    // 이들의 순서는 allChats의 초기 정렬로 인해 자연스럽게 올바릅니다
     const ungroupedOrGroupChats = allChats.filter(chat => chat.isGroup || (!chat.isGroup && !chat.groupId));
     ungroupedOrGroupChats.forEach(chat => {
         const item = createChatListItem(chat);
         chatListEl.appendChild(item);
     });
 
-    // 모든 그룹 제목에 접기 이벤트 추가
     document.querySelectorAll('.chat-group-header').forEach(header => {
         header.addEventListener('click', () => {
             header.classList.toggle('collapsed');
@@ -5113,29 +4944,19 @@ async function renderChatList() {
         });
     });
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
 function createChatListItem(chat) {
     const lastMsgObj = chat.history.filter(msg => !msg.isHidden).slice(-1)[0] || {};
     let lastMsgDisplay;
-
-    // --- ▼▼▼ 【핵심 수정】여기에 관계 상태 판단 추가 ▼▼▼ ---
     if (!chat.isGroup && chat.relationship?.status === 'pending_user_approval') {
         lastMsgDisplay = `<span style="color: #ff8c00;">[친구 신청] ${chat.relationship.applicationReason || '당신을 친구로 추가 요청'}</span>`;
     }
-    // --- ▲▲▲ 수정 끝 ▲▲▲ ---
 
-// ▼▼▼ 여기에 else if 추가 ▼▼▼
 else if (!chat.isGroup && chat.relationship?.status === 'blocked_by_ai') {
     lastMsgDisplay = `<span style="color: #dc3545;">[당신은 상대방에게 차단되었습니다]</span>`;
 }
-// ▲▲▲ 새로운 추가 끝 ▲▲▲
-    
-    // 【핵심 수정】마지막 메시지 대신 상태를 우선 표시
     if (chat.isGroup) {
-        // 그룹 채팅 로직은 변경되지 않습니다
         if (lastMsgObj.type === 'pat_message') { lastMsgDisplay = `[시스템 메시지] ${lastMsgObj.content}`; }
-        // ... (다른 그룹 채팅 메시지 유형 판단) ...
         else if (lastMsgObj.type === 'transfer') { lastMsgDisplay = '[송금]'; }
         else if (lastMsgObj.type === 'ai_image' || lastMsgObj.type === 'user_photo') { lastMsgDisplay = '[사진]'; }
         else if (lastMsgObj.type === 'voice_message') { lastMsgDisplay = '[음성]'; }
@@ -5148,8 +4969,7 @@ else if (!chat.isGroup && chat.relationship?.status === 'blocked_by_ai') {
         }
 
     } else {
-        // 1:1 채팅 로직:상태 표시
-        // chat.status 객체가 존재하는지 확인
+
         const statusText = chat.status?.text || '온라인';
         lastMsgDisplay = `[${statusText}]`;
     }
@@ -5159,7 +4979,6 @@ else if (!chat.isGroup && chat.relationship?.status === 'blocked_by_ai') {
     item.dataset.chatId = chat.id;
     const avatar = chat.isGroup ? chat.settings.groupAvatar : chat.settings.aiAvatar;
     
-    // 【핵심 수정】last 조정-msg 의 색상, 상태를 더 눈에 띄게
     item.innerHTML = `
         <img src="${avatar || defaultAvatar}" class="avatar">
         <div class="info">
@@ -5198,7 +5017,6 @@ else if (!chat.isGroup && chat.relationship?.status === 'blocked_by_ai') {
     return item;
 }
 
-// ▼▼▼ 이것을 사용하십시오【진단 기능이 포함된 새로운 버전】기존 renderChatInterface 함수를 대체합니다 ▼▼▼
 function renderChatInterface(chatId) {
     cleanupWaimaiTimers();
     const chat = state.chats[chatId];
@@ -5240,7 +5058,6 @@ function renderChatInterface(chatId) {
         let lockHtml = '';
         switch (chat.relationship.status) {
             case 'blocked_by_user':
-                // --- 【핵심 수정:여기에 진단 패널 추가】 ---
                 const isSimulationRunning = simulationIntervalId !== null;
                 const blockedTimestamp = chat.relationship.blockedTimestamp;
                 const cooldownHours = state.globalSettings.blockCooldownHours || 1;
@@ -5263,7 +5080,6 @@ function renderChatInterface(chatId) {
                     </div>
                     <button id="force-apply-check-btn" class="lock-action-btn secondary" style="margin-top: 10px;">강제로 친구 신청 감지 한 번 트리거</button>
                 `;
-                // --- 【수정 끝】 ---
                 break;
             case 'blocked_by_ai':
                 lockHtml = `
@@ -5279,8 +5095,6 @@ function renderChatInterface(chatId) {
                     <button id="reject-friend-btn" class="lock-action-btn secondary">거절</button>
                 `;
                 break;
-
-            // 【핵심 수정】신청 후 당신이 보는 인터페이스 수정
             case 'pending_ai_approval':
                 lockHtml = `<span class="lock-text">친구 신청이 전송되었습니다, 상대방의 승인을 기다립니다...</span>`;
                 break;
@@ -5288,7 +5102,6 @@ function renderChatInterface(chatId) {
         lockContent.innerHTML = lockHtml;
     }
     messagesContainer.innerHTML = '';
-    // ...후속 코드는 변경되지 않습니다
     const chatScreen = document.getElementById('chat-interface-screen');
     chatScreen.style.backgroundImage = chat.settings.background ? `url(${chat.settings.background})` : 'none';
     chatScreen.style.backgroundColor = chat.settings.background ? 'transparent' : '#f0f2f5';
@@ -5308,13 +5121,11 @@ function renderChatInterface(chatId) {
     messagesContainer.appendChild(typingIndicator);
     setTimeout(() => messagesContainer.scrollTop = messagesContainer.scrollHeight, 0);
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
         function prependLoadMoreButton(container) { const button = document.createElement('button'); button.id = 'load-more-btn'; button.textContent = '더 이전 기록 로드'; button.addEventListener('click', loadMoreMessages); container.prepend(button); }
 
         function loadMoreMessages() { const messagesContainer = document.getElementById('chat-messages'); const chat = state.chats[state.activeChatId]; if (!chat) return; const loadMoreBtn = document.getElementById('load-more-btn'); if (loadMoreBtn) loadMoreBtn.remove(); const totalMessages = chat.history.length; const nextSliceStart = totalMessages - currentRenderedCount - MESSAGE_RENDER_WINDOW; const nextSliceEnd = totalMessages - currentRenderedCount; const messagesToPrepend = chat.history.slice(Math.max(0, nextSliceStart), nextSliceEnd); const oldScrollHeight = messagesContainer.scrollHeight; messagesToPrepend.reverse().forEach(msg => prependMessage(msg, chat)); currentRenderedCount += messagesToPrepend.length; const newScrollHeight = messagesContainer.scrollHeight; messagesContainer.scrollTop += (newScrollHeight - oldScrollHeight); if (totalMessages > currentRenderedCount) { prependLoadMoreButton(messagesContainer); } }
 
-// ▼▼▼ 이것을 사용하십시오【새 버전】기존 renderWallpaperScreen 함수를 대체합니다 ▼▼▼
 function renderWallpaperScreen() { 
     const preview = document.getElementById('wallpaper-preview'); 
     const bg = newWallpaperBase64 || state.globalSettings.wallpaper; 
@@ -5325,10 +5136,9 @@ function renderWallpaperScreen() {
         preview.style.backgroundImage = bg; 
         preview.textContent = '현재 그라데이션 색상'; 
     }
-    // 【핵심 수정】여기에 아이콘 렌더링 함수 호출
     renderIconSettings();
 }
-// ▲▲▲ 대체 끝 ▲▲▲
+
         window.renderWallpaperScreenProxy = renderWallpaperScreen;
 
         function applyGlobalWallpaper() { const homeScreen = document.getElementById('home-screen'); const wallpaper = state.globalSettings.wallpaper; if (wallpaper && wallpaper.startsWith('data:image')) homeScreen.style.backgroundImage = `url(${wallpaper})`; else if (wallpaper) homeScreen.style.backgroundImage = wallpaper; }
@@ -5340,7 +5150,6 @@ function renderWallpaperScreen() {
 
         function renderStickerPanel() { const grid = document.getElementById('sticker-grid'); grid.innerHTML = ''; if (state.userStickers.length === 0) { grid.innerHTML = '<p style="text-align:center; color: var(--text-secondary); grid-column: 1 / -1;">어른께서는 오른쪽 상단을 클릭해 주세요\"추가\"또는\"업로드\"첫 번째 이모티콘을 추가해 보세요!</p>'; return; } state.userStickers.forEach(sticker => { const item = document.createElement('div'); item.className = 'sticker-item'; item.style.backgroundImage = `url(${sticker.url})`; item.title = sticker.name; item.addEventListener('click', () => sendSticker(sticker)); addLongPressListener(item, () => { if (isSelectionMode) return; const existingDeleteBtn = item.querySelector('.delete-btn'); if (existingDeleteBtn) return; const deleteBtn = document.createElement('div'); deleteBtn.className = 'delete-btn'; deleteBtn.innerHTML = '&times;'; deleteBtn.onclick = async (e) => { e.stopPropagation(); const confirmed = await showCustomConfirm('이모티콘 삭제', `이모티콘을 삭제하시겠습니까? "${sticker.name}" ?`, { confirmButtonClass: 'btn-danger' }); if (confirmed) { await db.userStickers.delete(sticker.id); state.userStickers = state.userStickers.filter(s => s.id !== sticker.id); renderStickerPanel(); } }; item.appendChild(deleteBtn); deleteBtn.style.display = 'block'; setTimeout(() => item.addEventListener('mouseleave', () => deleteBtn.remove(), { once: true }), 3000); }); grid.appendChild(item); }); }
 
-// ▼▼▼ 이것을 사용하십시오【업데이트됨】의 버전이 기존 createMessageElement 함수를 대체합니다 ▼▼▼
 function createMessageElement(msg, chat) {
     if (msg.isHidden) {
         return null;
@@ -5416,7 +5225,6 @@ function createMessageElement(msg, chat) {
     if (msg.type === 'share_link') {
         bubble.classList.add('is-link-share');
         
-        // 【핵심 수정 1】onclick을="openBrowser(...)" 제거합니다, JS에서 동적으로 이벤트를 바인딩할 것입니다
         contentHtml = `
             <div class="link-share-card" data-timestamp="${msg.timestamp}">
                 <div class="title">${msg.title || '제목 없음'}</div>
@@ -5429,7 +5237,6 @@ function createMessageElement(msg, chat) {
         `;
     }
 
-    // 후속 다른 else if는 변경되지 않습니다
     else if (msg.type === 'user_photo' || msg.type === 'ai_image') {
         bubble.classList.add('is-ai-image');
         const altText = msg.type === 'user_photo' ? "사용자가 묘사한 사진" : "AI생성된 이미지";
@@ -5443,11 +5250,10 @@ function createMessageElement(msg, chat) {
     }         else if (msg.type === 'transfer') {
         bubble.classList.add('is-transfer');
         
-        // 【핵심 수정】인지 판단\"보냄\"아니면\"받음\"
         let titleText, noteText;
         if (isUser) {
             titleText = `에게 송금 ${msg.receiverName || 'Ta'}`;
-            // 만약 사용자가 보낸 것이고 AI가 이미 처리했다면, 상태를 표시합니다
+
             if (msg.status === 'accepted') {
                 noteText = '상대방이 수령했습니다';
             } else if (msg.status === 'declined') {
@@ -5455,8 +5261,8 @@ function createMessageElement(msg, chat) {
             } else {
                 noteText = msg.note || '상대방의 처리 대기 중...';
             }
-        } else { // AI보낸 메시지
-            if (msg.isRefund) { // 【새로 추가】환불 여부 판단
+        } else { 
+            if (msg.isRefund) { 
                 titleText = `${msg.senderName}로부터 환불`;
                 noteText = '송금 거부됨';
             } else {
@@ -5543,7 +5349,6 @@ function createMessageElement(msg, chat) {
     bubble.classList.add('is-red-packet');
     const myNickname = chat.settings.myNickname || '내';
     
-    // 최신 msg 객체에서 상태 가져오기
     const hasClaimed = msg.claimedBy && msg.claimedBy[myNickname];
     const isFinished = msg.isFullyClaimed;
 
@@ -5551,14 +5356,12 @@ function createMessageElement(msg, chat) {
     let claimedInfoHtml = '';
     let typeText = '무작위 금액 빨간 봉투';
 
-    // 1. 홍바오 카드 스타일 판단 (색상)
     if (isFinished) {
         cardClass = 'opened';
     } else if (msg.packetType === 'direct' && Object.keys(msg.claimedBy || {}).length > 0) {
-        cardClass = 'opened'; // 전용 홍바오가 수령되어도 회색으로 변함
+        cardClass = 'opened'; 
     }
     
-    // 2. 홍바오 아래의 팁 텍스트 판단
     if (msg.packetType === 'direct') {
         typeText = `전용 빨간 봉투: ${msg.receiverName}에게`;
     }
@@ -5571,7 +5374,6 @@ function createMessageElement(msg, chat) {
         claimedInfoHtml = `<div class="rp-claimed-info">${msg.receiverName}이(가) 수령했습니다</div>`;
     }
 
-    // 3. 최종 HTML을 연결하고, onclick이 전역에 등록된 함수를 호출하는지 확인
     contentHtml = `
         <div class="red-packet-card ${cardClass}">
             <div class="rp-header">
@@ -5582,7 +5384,6 @@ function createMessageElement(msg, chat) {
             ${claimedInfoHtml}
         </div>
     `;
-// ▲▲▲ 새로운 추가 끝 ▲▲▲
 
     } else if (msg.type === 'poll') {
     bubble.classList.add('is-poll');
@@ -5590,7 +5391,6 @@ function createMessageElement(msg, chat) {
     let totalVotes = 0;
     const voteCounts = {};
 
-    // 총 투표수와 각 옵션의 투표수 계산
     for (const option in msg.votes) {
         const count = msg.votes[option].length;
         voteCounts[option] = count;
@@ -5625,12 +5425,10 @@ function createMessageElement(msg, chat) {
     optionsHtml += '</div>';
     
     let footerHtml = '';
-    // 【핵심 수정】여기에서 버튼 표시 로직을 통일합니다
     if (msg.isClosed) {
-        // 투표가 종료되었다면, 항상 표시\"결과 보기\"
         footerHtml = `<div class="poll-footer"><span class="poll-total-votes">총 ${totalVotes}명 투표</span><button class="poll-action-btn">결과 보기</button></div>`;
     } else {
-        // 투표가 종료되지 않았다면, 항상 표시\"투표 종료\"
+
         footerHtml = `<div class="poll-footer"><span class="poll-total-votes">총 ${totalVotes}명 투표</span><button class="poll-action-btn">투표 종료</button></div>`;
     }
 
@@ -5641,7 +5439,6 @@ function createMessageElement(msg, chat) {
             ${footerHtml}
         </div>
     `;
-// ▲▲▲ 대체 끝 ▲▲▲
 
     } else if (typeof msg.content === 'string' && STICKER_REGEX.test(msg.content)) {
         bubble.classList.add('is-sticker');
@@ -5676,22 +5473,18 @@ function createMessageElement(msg, chat) {
 
     return wrapper;
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
         function prependMessage(msg, chat) { const messagesContainer = document.getElementById('chat-messages'); const messageEl = createMessageElement(msg, chat); 
 
-    if (!messageEl) return; // <--- 이 줄 추가, 동일하게 처리
+    if (!messageEl) return; 
 
 const loadMoreBtn = document.getElementById('load-more-btn'); if (loadMoreBtn) { messagesContainer.insertBefore(messageEl, loadMoreBtn.nextSibling); } else { messagesContainer.prepend(messageEl); } }
 
-// ▼▼▼ 이것을 사용하십시오【애니메이션 버전】원래의 appendMessage 함수를 대체합니다 ▼▼▼
 function appendMessage(msg, chat, isInitialLoad = false) {
     const messagesContainer = document.getElementById('chat-messages');
     const messageEl = createMessageElement(msg, chat);
 
-    if (!messageEl) return; // 메시지가 숨김 상태라면, 처리하지 않습니다
-
-    // 【핵심】새 메시지에만 애니메이션을 추가하고, 초기 로드 메시지에는 추가하지 않습니다
+    if (!messageEl) return; 
     if (!isInitialLoad) {
         messageEl.classList.add('animate-in');
     }
@@ -5704,13 +5497,11 @@ function appendMessage(msg, chat, isInitialLoad = false) {
         currentRenderedCount++;
     }
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
-// ▼▼▼ 이것을 사용하십시오【수정 후】의 버전이 기존 openChat 함수를 대체합니다 ▼▼▼
 function openChat(chatId) {
     state.activeChatId = chatId;
     const chat = state.chats[chatId];
-    if (!chat) return; // 안전 검사 추가
+    if (!chat) return; 
 
     renderChatInterface(chatId);
     showScreen('chat-interface-screen');
@@ -5722,10 +5513,8 @@ function openChat(chatId) {
         triggerAiResponse();
     }
     
-    // 【핵심 수정】그룹 채팅 여부에 따라 투표 버튼을 표시하거나 숨깁니다
     document.getElementById('send-poll-btn').style.display = chat.isGroup ? 'flex' : 'none';
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
 async function triggerAiResponse() {
     if (!state.activeChatId) return;
@@ -5734,25 +5523,23 @@ async function triggerAiResponse() {
 
 const chatHeaderTitle = document.getElementById('chat-header-title');
 
-    // 【애니메이션 핵심 1/2】: AI입력 시작 시, 먼저 이전 제목을 페이드아웃한 다음 새 제목을 페이드인합니다
     if (chatHeaderTitle && !chat.isGroup) {
         chatHeaderTitle.style.opacity = 0;
         setTimeout(() => {
             chatHeaderTitle.textContent = '상대방이 입력 중입니다...';
             chatHeaderTitle.classList.add('typing-status');
             chatHeaderTitle.style.opacity = 1;
-        }, 200); // 이 시간은(200ms)CSS의 transition 시간과(0.2s)일치해야 합니다
+        }, 200); /* 이 시간은(200ms)CSS의 transition 시간과(0.2s)일치해야 합니다 */
   }
     
     try {
         const { proxyUrl, apiKey, model } = state.apiConfig;
         if (!proxyUrl || !apiKey || !model) {
             alert('먼저 API 설정에서 역방향 프록시 주소, 비밀 키 및 모델을 구성해 주세요.');
-                        // 【V2.0 입력 중...】제목 복원
+
 const chatHeaderTitle = document.getElementById('chat-header-title');
-// 제목 요소와 해당 채팅 데이터가 모두 여전히 존재하는지 확인
+
 if (chatHeaderTitle && state.chats[chatId]) {
-    // 1:1 채팅에서만 제목을 복원하고, 그룹 채팅 제목은 고정입니다
     if (!state.chats[chatId].isGroup) {
         chatHeaderTitle.textContent = state.chats[chatId].name;
         chatHeaderTitle.classList.remove('typing-status');
@@ -5761,21 +5548,18 @@ if (chatHeaderTitle && state.chats[chatId]) {
             return;
         }
 
-        // --- 【핵심 리팩토링 V2:컨텍스트와 이유를 포함한 친구 신청 처리 로직】---
         if (!chat.isGroup && chat.relationship?.status === 'pending_ai_approval') {
             console.log(`캐릭터를 위해 "${chat.name}" 이유가 있는 친구 신청 의사 결정 프로세스 트리거...`);
 
-            // 1. 【컨텍스트 주입】차단되기 전 마지막 5개 채팅 기록을 참고용으로 가져오기
             const contextSummary = chat.history
                 .filter(m => !m.isHidden)
-                .slice(-10, -5) // 차단 전 마지막 5개 메시지 가져오기
+                .slice(-10, -5) 
                 .map(msg => {
                     const sender = msg.role === 'user' ? '사용자' : chat.name;
                     return `${sender}: ${String(msg.content).substring(0, 50)}...`;
                 })
                 .join('\n');
 
-            // 2. 【새로운 지침】AI가 강제로 이유를 제시하도록 하는 프롬프트 구축
             const decisionPrompt = `
 # 당신의 임무
 당신은 현재 캐릭터입니다\"${chat.name}\".사용자는 이전에 당신에게 차단되었으며, 이제 그(그녀)는 당신에게 친구 신청을 보내 화해를 원합니다.
@@ -5795,7 +5579,6 @@ ${contextSummary || "(유효한 대화 기록 없음)"}
             const messagesForDecision = [{ role: 'user', content: decisionPrompt }];
 
             try {
-                // 3. 요청 보내기
                 const response = await fetch(`${proxyUrl}/v1/chat/completions`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
@@ -5807,36 +5590,32 @@ ${contextSummary || "(유효한 대화 기록 없음)"}
                 }
                 const data = await response.json();
                 
-                // AI의 답변을 정화하고 분석합니다
                 const rawContent = data.choices[0].message.content.replace(/^```json\s*/, '').replace(/```$/, '').trim();
                 const decisionObj = JSON.parse(rawContent);
 
-                // 4. AI의 결정과 이유에 따라, 상태를 업데이트하고 메시지를 보냅니다
                 if (decisionObj.decision === 'accept') {
                     chat.relationship.status = 'friend';
-                    // AI가 제시한 이유를 새로운 메시지로
+
                     const acceptMessage = { role: 'assistant', senderName: chat.name, content: decisionObj.reason, timestamp: Date.now() };
                     chat.history.push(acceptMessage);
                 } else {
-                    chat.relationship.status = 'blocked_by_ai'; // 거절 후, 상태가 AI 차단됨으로 돌아갑니다
+                    chat.relationship.status = 'blocked_by_ai'; 
                     const rejectMessage = { role: 'assistant', senderName: chat.name, content: decisionObj.reason, timestamp: Date.now() };
                     chat.history.push(rejectMessage);
                 }
-                chat.relationship.applicationReason = ''; // 신청 이유 비우기
+                chat.relationship.applicationReason = ''; 
 
                 await db.chats.put(chat);
-                renderChatInterface(chatId); // 화면을 새로고침하고, 새 메시지와 새 상태를 표시합니다
+                renderChatInterface(chatId); 
                 renderChatList();
 
             } catch (error) {
-                // 【안정적인 오류 처리】어떤 단계에서라도 오류가 발생하면, 상태를 재설정하고, 사용자가 다시 시도할 수 있도록 합니다
-                chat.relationship.status = 'blocked_by_ai'; // 상태를 다시 변경합니다\"AI에게 차단됨\"
+                chat.relationship.status = 'blocked_by_ai'; 
                 await db.chats.put(chat);
                 await showCustomAlert('신청 실패', `AI친구 신청을 처리하는 도중 오류가 발생했습니다, 잠시 후 다시 시도해 주세요.\n오류 메시지: ${error.message}`);
-                renderChatInterface(chatId); // UI를 새로고침하여, 다음이 나타나도록 합니다\"다시 신청\"버튼이 다시 나타나도록
+                renderChatInterface(chatId); 
             }
             
-            // 결정 과정이 종료됩니다, 반드시 돌아가야 합니다, 이후의 일반적인 채팅 논리는 더 이상 실행되지 않습니다
             return; 
         }
 
@@ -5854,7 +5633,6 @@ ${contextSummary || "(유효한 대화 기록 없음)"}
         }
         let musicContext = '';
         if (musicState.isActive && musicState.activeChatId === chatId) {
-            // 【핵심 수정】더 자세한 음악 맥락을 제공하세요
             const currentTrack = musicState.currentIndex > -1 ? musicState.playlist[musicState.currentIndex] : null;
             const playlistInfo = musicState.playlist.map(t => `"${t.name}"`).join(', ');
 
@@ -5956,7 +5734,7 @@ ${membersList}
                 return { role: 'user', content: content };
             }).filter(Boolean);
 
-        } else { // 1:1 채팅 프롬프트
+        } else { 
             systemPrompt = `당신은 지금 ~이라는 이름의"${chat.name}"캐릭터를 연기하고 있습니다.
 # 당신의 캐릭터 설정:
 ${chat.settings.aiPersona}
@@ -5975,7 +5753,7 @@ ${chat.settings.aiPersona}
 - 대화 내용이나 기분에 따라 아래 아바타 갤러리에서 새 아바타를 선택하여 변경할 수 있습니다.
 - **사용 가능한 아바타 목록 (다음 이름 중 하나를 선택하십시오)**:
 ${chat.settings.aiAvatarLibrary && chat.settings.aiAvatarLibrary.length > 0
-    ? chat.settings.aiAvatarLibrary.map(avatar => `- ${avatar.name}`).join('\n') // 【핵심 수정】이름만 제공, URL은 제공 안 함
+    ? chat.settings.aiAvatarLibrary.map(avatar => `- ${avatar.name}`).join('\n') 
     : '- (아바타 갤러리가 비어 있어 아바타를 변경할 수 없습니다)'
   }
 # 당신이 사용할 수 있는 작업 명령어 (JSON배열 내의 요소):
@@ -6113,15 +5891,11 @@ ${contextSummaryForApproval}
 if (!response.ok) {
     let errorMsg = `API Error: ${response.status}`;
     try {
-        // 오류 메시지 본문을 JSON으로 파싱 시도
         const errorData = await response.json();
-        // 안전하게 오류 정보를 가져오고, 구조가 예상과 다르면 전체 오류 객체를 문자열로 변환합니다
         errorMsg += ` - ${errorData?.error?.message || JSON.stringify(errorData)}`;
     } catch (jsonError) {
-        // JSON도 아니면 텍스트를 직접 읽습니다
         errorMsg += ` - ${await response.text()}`;
     }
-    // 자세한 정보가 포함된 오류를 발생시켜 catch 블록에서 다시 오류가 발생하지 않도록 합니다
     throw new Error(errorMsg);
 }
         const data = await response.json();
@@ -6135,10 +5909,7 @@ if (!response.ok) {
         const isViewingThisChat = document.getElementById('chat-interface-screen').classList.contains('active') && state.activeChatId === chatId;
         
         let callHasBeenHandled = false;
-
         let messageTimestamp = Date.now();
-
-        // ★★★ 핵심 수정 1단계: 렌더링할 메시지를 수집하기 위한 새 배열 초기화 ★★★
         let newMessagesToRender = []; 
 
         for (const msgData of messagesArray) {
@@ -6512,40 +6283,33 @@ case 'change_avatar':
     const foundAvatar = chat.settings.aiAvatarLibrary.find(avatar => avatar.name === avatarName);
     
     if (foundAvatar) {
-        // 찾았다면, 아바타를 업데이트합니다
         chat.settings.aiAvatar = foundAvatar.url;
         
-        // 사용자에게 아바타가 변경되었음을 알리는 시스템 메시지 생성
         const systemNotice = {
             role: 'system',
-            type: 'pat_message', // 가운데 정렬 스타일 재사용
+            type: 'pat_message', 
             content: `[${chat.name} 아바타를 변경했습니다]`,
             timestamp: Date.now()
         };
         chat.history.push(systemNotice);
         
-        // 현재 채팅 화면이라면 실시간 렌더링
         if (isViewingThisChat) {
             appendMessage(systemNotice, chat);
-            // 새 아바타를 표시하기 위해 즉시 채팅 화면 새로고침
             renderChatInterface(chatId);
         }
     }
-    // 처리 완료 후, AI가 반환할 수 있는 다른 메시지 계속 처리
     continue;
 
-// ▼▼▼ triggerAiResponse의 switch 문에서,【추가】이 두 가지 새로운 case ▼▼▼
-
-                case 'accept_transfer': { // 중괄호를 사용하여 블록 스코프 생성
+                case 'accept_transfer': { 
                     const originalTransferMsgIndex = chat.history.findIndex(m => m.timestamp === msgData.for_timestamp);
                     if (originalTransferMsgIndex > -1) {
                         const originalMsg = chat.history[originalTransferMsgIndex];
                         originalMsg.status = 'accepted';
                     }
-                    continue; // 명령 수락은 상태만 수정하고 새 메시지를 생성하지 않습니다
+                    continue; 
                 }
 
-                case 'decline_transfer': { // 중괄호를 사용하여 블록 스코프 생성
+                case 'decline_transfer': { 
                     const originalTransferMsgIndex = chat.history.findIndex(m => m.timestamp === msgData.for_timestamp);
                     if (originalTransferMsgIndex > -1) {
                         const originalMsg = chat.history[originalTransferMsgIndex];
