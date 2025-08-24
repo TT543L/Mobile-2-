@@ -6315,30 +6315,23 @@ case 'change_avatar':
                         const originalMsg = chat.history[originalTransferMsgIndex];
                         originalMsg.status = 'declined';
                         
-                        // 【핵심】새로운\"환불\"메시지
                         const refundMessage = {
                             role: 'assistant',
                             senderName: chat.name,
                             type: 'transfer',
-                            isRefund: true, // 이것이 환불 메시지임을 표시
+                            isRefund: true, 
                             amount: originalMsg.amount,
                             note: '송금 거부됨',
-                            timestamp: messageTimestamp++ // 증가하는 타임스탬프 사용
+                            timestamp: messageTimestamp++ 
                         };
-                        
-                        // 새 메시지를 기록에 추가하면 후속 루프에서 처리되고 렌더링됩니다
                         chat.history.push(refundMessage);
                     }
-                    continue; // AI가 반환하는 텍스트 메시지 계속 처리
+                    continue; 
                 }
-
-// ▲▲▲ 추가 종료 ▲▲▲
 
     case 'system_message':
         aiMessage = { role: 'system', type: 'pat_message', content: msgData.content, timestamp: Date.now() };
         break;
-
-// ▼▼▼ triggerAiResponse의 switch 문에서,【반드시 추가해야 합니다】이 새로운 case ▼▼▼
 
                 case 'share_link':
                     aiMessage = { 
@@ -6346,13 +6339,10 @@ case 'change_avatar':
                         type: 'share_link',
                         title: msgData.title,
                         description: msgData.description,
-                        // thumbnail_url: msgData.thumbnail_url, // 우리는 이미 이미지를 사용하지 않기로 결정했으므로 이 줄은 필요 없습니다
                         source_name: msgData.source_name,
-                        content: msgData.content // 이것은 기사 본문이며, 카드를 클릭하면 표시되는 내용입니다
+                        content: msgData.content 
                     };
                     break;
-
-// ▲▲▲ 추가 종료 ▲▲▲
                 
                 case 'text':
                     aiMessage = { ...baseMessage, content: String(msgData.content || msgData.message) };
@@ -6386,21 +6376,16 @@ case 'change_avatar':
                      break;
             }
 
-            // 【핵심 수정】렌더링 로직을 루프 밖으로 이동
             if (aiMessage) {
-                // 1. 새 메시지를 기록에 저장
                 chat.history.push(aiMessage);
                 
-                // 2. 현재 채팅 화면일 때만 애니메이션과 함께 추가 실행
                 if (isViewingThisChat) {
                     appendMessage(aiMessage, chat);
-                    // 3. 【핵심】여기서 잠시 멈춰서 애니메이션이 재생될 시간을 줍니다
                     await new Promise(resolve => setTimeout(resolve, Math.random() * 1800 + 1000));
                 }
             }
   }
         
-        // ★★★ 핵심 수정 4단계: 알림 로직을 수정하여 이전 배열 전체가 아닌 새 메시지 목록을 확인하도록 합니다 ★★★
         const firstNewMessage = newMessagesToRender[0];
         if (!isViewingThisChat && firstNewMessage) {
             let notificationText;
@@ -6446,14 +6431,12 @@ case 'change_avatar':
             renderChatInterface(chatId);
         }
     } finally {
-                // 【애니메이션 코어 2/2】: 모든 작업이 완료되면 애니메이션으로 제목 복원
+
         const chatHeaderTitle = document.getElementById('chat-header-title');
         if (chatHeaderTitle && state.chats[chatId]) {
             if (!state.chats[chatId].isGroup) {
-                // 먼저 페이드 아웃\"입력 중...\"
                 chatHeaderTitle.style.opacity = 0;
                 setTimeout(() => {
-                    // 그다음 AI 이름 페이드 인
                     chatHeaderTitle.textContent = state.chats[chatId].name;
                     chatHeaderTitle.classList.remove('typing-status');
                     chatHeaderTitle.style.opacity = 1;
@@ -6473,18 +6456,15 @@ case 'change_avatar':
         function enterSelectionMode(initialMsgTimestamp) { if (isSelectionMode) return; isSelectionMode = true; document.getElementById('chat-interface-screen').classList.add('selection-mode'); toggleMessageSelection(initialMsgTimestamp); }
 
         function exitSelectionMode() {
-    cleanupWaimaiTimers(); // <--- 여기에 이 코드 줄을 추가합니다
+    cleanupWaimaiTimers(); 
  if (!isSelectionMode) return; isSelectionMode = false; document.getElementById('chat-interface-screen').classList.remove('selection-mode'); selectedMessages.forEach(ts => { const bubble = document.querySelector(`.message-bubble[data-timestamp="${ts}"]`); if (bubble) bubble.classList.remove('selected'); }); selectedMessages.clear(); }
 
-// ▼▼▼ 이것을 사용하십시오【최종 간소화 버전】이전 toggleMessageSelection 함수 교체 ▼▼▼
 function toggleMessageSelection(timestamp) {
-    // 【핵심 수정】선택기가 간소화되어 삭제된 .recalled를 더 이상 찾지 않습니다-message-placeholder
     const elementToSelect = document.querySelector(
         `.message-bubble[data-timestamp="${timestamp}"]`
     );
 
     if (!elementToSelect) return;
-
     if (selectedMessages.has(timestamp)) {
         selectedMessages.delete(timestamp);
         elementToSelect.classList.remove('selected');
@@ -6499,7 +6479,6 @@ function toggleMessageSelection(timestamp) {
         exitSelectionMode();
     }
 }
-// ▲▲▲ 대체 끝 ▲▲▲
 
         function addLongPressListener(element, callback) { let pressTimer; const startPress = (e) => { if(isSelectionMode) return; e.preventDefault(); pressTimer = window.setTimeout(() => callback(e), 500); }; const cancelPress = () => clearTimeout(pressTimer); element.addEventListener('mousedown', startPress); element.addEventListener('mouseup', cancelPress); element.addEventListener('mouseleave', cancelPress); element.addEventListener('touchstart', startPress, { passive: true }); element.addEventListener('touchend', cancelPress); element.addEventListener('touchmove', cancelPress); }
 
@@ -6682,7 +6661,6 @@ function toggleMessageSelection(timestamp) {
                     openAlbum(album.id);
                 });
 
-                // ▼▼▼ 새로 추가된 핵심 코드는 여기입니다 ▼▼▼
                 addLongPressListener(albumItem, async () => {
                     const confirmed = await showCustomConfirm(
                         '앨범 삭제',
@@ -6691,20 +6669,15 @@ function toggleMessageSelection(timestamp) {
                     );
 
                     if (confirmed) {
-                        // 1. 사진 테이블에서 해당 앨범의 모든 사진 삭제
                         await db.qzonePhotos.where('albumId').equals(album.id).delete();
-                        
-                        // 2. 앨범 테이블에서 해당 앨범 자체 삭제
+
                         await db.qzoneAlbums.delete(album.id);
                         
-                        // 3. 앨범 목록 다시 렌더링
                         await renderAlbumList();
                         
                         alert('앨범이 성공적으로 삭제되었습니다.');
                     }
                 });
-                // ▲▲▲ 새 코드 종료 ▲▲▲
-
                 albumGrid.appendChild(albumItem);
             });
         }
@@ -6743,58 +6716,35 @@ function toggleMessageSelection(timestamp) {
             }
         }
 
-// --- ↓↓↓ 여기서부터 복사 ↓↓↓ ---
-
-/**
- * 이미지 뷰어 열기
- * @param {string} clickedPhotoUrl - 사용자가 클릭한 사진의 URL
- */
 async function openPhotoViewer(clickedPhotoUrl) {
     if (!state.activeAlbumId) return;
-
-    // 1. 데이터베이스에서 현재 앨범의 모든 사진 가져오기
     const photosInAlbum = await db.qzonePhotos.where('albumId').equals(state.activeAlbumId).toArray();
     photoViewerState.photos = photosInAlbum.map(p => p.url);
 
-    // 2. 클릭된 사진의 인덱스 찾기
     photoViewerState.currentIndex = photoViewerState.photos.findIndex(url => url === clickedPhotoUrl);
-    if (photoViewerState.currentIndex === -1) return; // 찾을 수 없으면 열지 않음
+    if (photoViewerState.currentIndex === -1) return; 
 
-    // 3. 모달 표시 및 첫 번째 이미지 렌더링
     document.getElementById('photo-viewer-modal').classList.add('visible');
     renderPhotoViewer();
     photoViewerState.isOpen = true;
 }
 
-/**
- * 현재 상태에 따라 뷰어 내용 렌더링(이미지와 버튼)
- */
 function renderPhotoViewer() {
     if (photoViewerState.currentIndex === -1) return;
-
     const imageEl = document.getElementById('photo-viewer-image');
     const prevBtn = document.getElementById('photo-viewer-prev-btn');
     const nextBtn = document.getElementById('photo-viewer-next-btn');
     
-    // 페이드 아웃 효과
     imageEl.style.opacity = 0;
 
     setTimeout(() => {
-        // 이미지 소스 업데이트
         imageEl.src = photoViewerState.photos[photoViewerState.currentIndex];
-        // 페이드 인 효과
         imageEl.style.opacity = 1;
-    }, 100); // CSS 전환을 트리거하기 위해 약간의 시간 지연
-
-    // 버튼 상태 업데이트:첫 번째인 경우, 비활성화\"이전\"버튼
+    }, 100); 
     prevBtn.disabled = photoViewerState.currentIndex === 0;
-    // 마지막인 경우, 비활성화\"다음\"버튼
     nextBtn.disabled = photoViewerState.currentIndex === photoViewerState.photos.length - 1;
 }
 
-/**
- * 다음 사진 표시
- */
 function showNextPhoto() {
     if (photoViewerState.currentIndex < photoViewerState.photos.length - 1) {
         photoViewerState.currentIndex++;
@@ -6802,9 +6752,6 @@ function showNextPhoto() {
     }
 }
 
-/**
- * 이전 사진 표시
- */
 function showPrevPhoto() {
     if (photoViewerState.currentIndex > 0) {
         photoViewerState.currentIndex--;
@@ -6812,30 +6759,18 @@ function showPrevPhoto() {
     }
 }
 
-/**
- * 이미지 뷰어 닫기
- */
 function closePhotoViewer() {
     document.getElementById('photo-viewer-modal').classList.remove('visible');
     photoViewerState.isOpen = false;
     photoViewerState.photos = [];
     photoViewerState.currentIndex = -1;
-    // 다음 열 때 이전 이미지가 번쩍이는 것을 방지하기 위해 이미지 지우기
     document.getElementById('photo-viewer-image').src = '';
 }
 
-// --- ↑↑↑ 여기까지 복사 ↑↑↑ ---
-        // ▼▼▼ 이 새 함수를 JS 기능 함수 정의 영역에 붙여넣으십시오 ▼▼▼
-        
-        /**
-         * 활동 알림 빨간 점 표시 업데이트
-         * @param {number} count - 읽지 않은 활동 수
-         */
         function updateUnreadIndicator(count) {
             unreadPostsCount = count;
-            localStorage.setItem('unreadPostsCount', count); // 영구 저장
+            localStorage.setItem('unreadPostsCount', count); 
 
-            // --- 하단 내비게이션 바 업데이트\"피드\"버튼 ---
             const navItem = document.querySelector('.nav-item[data-view="qzone-screen"]');
             
             const targetSpan = navItem.querySelector('span'); // 텍스트로 이동 "피드"
@@ -6845,9 +6780,8 @@ function closePhotoViewer() {
                 if (!indicator) {
                     indicator = document.createElement('span');
                     indicator.className = 'unread-indicator';
-                                                           targetSpan.style.position = 'relative'; // span에 상대 위치 지정 추가
-                    targetSpan.appendChild(indicator); // 빨간 점을 span의 하위 요소로 만들기
-                    
+                                                           targetSpan.style.position = 'relative'; 
+                    targetSpan.appendChild(indicator); 
                 }
                 indicator.textContent = count > 99 ? '99+' : count;
                 indicator.style.display = 'block';
@@ -6857,7 +6791,6 @@ function closePhotoViewer() {
                 }
             }
 
-            // --- 채팅 화면 목록으로 돌아가는 버튼 업데이트 ---
             const backBtn = document.getElementById('back-to-list-btn');
             let backBtnIndicator = backBtn.querySelector('.unread-indicator');
 
@@ -6865,10 +6798,9 @@ function closePhotoViewer() {
                 if (!backBtnIndicator) {
                     backBtnIndicator = document.createElement('span');
                     backBtnIndicator.className = 'unread-indicator back-btn-indicator';
-                    backBtn.style.position = 'relative'; // 정확하게 위치 지정되도록 확인
+                    backBtn.style.position = 'relative'; 
                     backBtn.appendChild(backBtnIndicator);
                 }
-                // 뒤로가기 버튼의 빨간 점은 일반적으로 숫자를 표시하지 않고 점만 표시합니다
                 backBtnIndicator.style.display = 'block';
             } else {
                 if (backBtnIndicator) {
@@ -6877,13 +6809,9 @@ function closePhotoViewer() {
             }
         }
         
-        // ▲▲▲ 새 함수 붙여넣기 종료 ▲▲▲
-
-// ▼▼▼ 이 두 새 함수를 JS 기능 함수 정의 영역에 붙여넣으십시오 ▼▼▼
 function startBackgroundSimulation() {
     if (simulationIntervalId) return;
     const intervalSeconds = state.globalSettings.backgroundActivityInterval || 60;
-    // 이전 고정 간격 45000을 동적 가져오기로 대체
     simulationIntervalId = setInterval(runBackgroundSimulationTick, intervalSeconds * 1000); 
 }
 
@@ -6893,11 +6821,7 @@ function stopBackgroundSimulation() {
         simulationIntervalId = null;
     }
 }
-// ▲▲▲ 붙여넣기 종료 ▲▲▲
 
-/**
- * 이것은 시뮬레이터의\"하트비트\",타이머 트리거마다 실행
- */
 function runBackgroundSimulationTick() {
     console.log("시뮬레이터 하트비트 틱...");
     if (!state.globalSettings.enableBackgroundActivity) {
@@ -6909,23 +6833,18 @@ function runBackgroundSimulationTick() {
     if (allSingleChats.length === 0) return;
 
     allSingleChats.forEach(chat => {
-        // 【핵심 수정】두 가지 상태 검사를 분리하여 논리를 더 명확하게
-
-        // 확인 1:처리【사용자에 의해 차단됨】캐릭터를 연기하고 있습니다
         if (chat.relationship?.status === 'blocked_by_user') {
             const blockedTimestamp = chat.relationship.blockedTimestamp;
-            // 보안 검사:차단 타임스탬프가 있는지 확인
             if (!blockedTimestamp) {
                 console.warn(`캐릭터 "${chat.name}" 상태가 차단되었지만 차단 타임스탬프가 없어 처리 건너뜀.`);
-                return; // 이 캐릭터는 건너뛰고 다음으로 계속
+                return; 
             }
 
             const blockedDuration = Date.now() - blockedTimestamp;
             const cooldownMilliseconds = (state.globalSettings.blockCooldownHours || 1) * 60 * 60 * 1000;
 
-            console.log(`캐릭터 확인 "${chat.name}":${Math.round(blockedDuration/1000/60)}분 차단됨, 쿨다운 기간 ${cooldownMilliseconds/1000/60}분 필요.`); // 로그 추가
+            console.log(`캐릭터 확인 "${chat.name}":${Math.round(blockedDuration/1000/60)}분 차단됨, 쿨다운 기간 ${cooldownMilliseconds/1000/60}분 필요.`); 
 
-            // 【핵심 수정】무작위 확률 제거, 쿨다운 기간이 지나면 즉시 트리거!
             if (blockedDuration > cooldownMilliseconds) {
                 console.log(`캐릭터 "${chat.name}" 의 쿨다운 기간이 지났습니다, 트리거\"반성\"및 친구 신청 이벤트...`);
                 
