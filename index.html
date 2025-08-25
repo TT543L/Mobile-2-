@@ -47,7 +47,7 @@ body {
 }
 
 #chat-list-bottom-nav {
-     padding-bottom: env(safe-area-inset-bottom);
+     padding-bottom: calc(50px + env(safe-area-inset-bottom));
 }
 
 .modal {
@@ -1475,7 +1475,7 @@ body {
     right: 0;           /* ★ right 새로 추가: 0,와 left: 0 함께 너비를 채우도록 */
     width: auto;        /* ★ auto로 변경, left가/right 너비를 결정하도록 */
     padding: 10px 15px;
-    padding-bottom: calc(10px + env(safe-area-inset-bottom)); /* iPhone 하단 안전 영역에 맞춤 */
+    padding-bottom: calc(50px + env(safe-area-inset-bottom)); /* iPhone 하단 안전 영역에 맞춤 */
     background-color: rgba(247, 247, 247, 0.9);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
